@@ -15,6 +15,15 @@ ER-diagram
 
 Relationer
 
+customers(ssn, customerName, address)
+orders(orderNbr, placedDate, deliveryDate, *ssn*)
+pallets(palletID, dateProduced, isBlocked, dateDelivered, *cookieID*, *orderNbr*)
+products(cookieID, cookie)
+ingredients(ingredientID, amountStorage, deliveryDate, deliveryAmount)
+recipeItems(amount, *ingredientID*, *cookieID*)
+orderItems(nbrPallets, *orderNbr*, *cookieID*)
+
+
 SQL statements to create all tables, views, stored procedures, and other database elements. (Don’t include statements to create the initial contents of the database.)
 
 Användarmanual
