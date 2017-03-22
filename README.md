@@ -9,17 +9,17 @@ Jenny Martinsson, dic15jma@student.lu.se, C15
 Projektet handlar om att göra ett databassystem åt Krusty Kookies Sweden AB. Vi ska implementera en databas och ett användargränssnitt som hanterar allting som rör produktion, blockering och sökning av pallar.
 
 ## Noteringar om vilka krav vi uppfyller/inte uppfyller
-Produktion
+#### Produktion
 
-Råmaterial
+#### Råmaterial
 
-Recept
+#### Recept
 
-Producerade pallar
+#### Producerade pallar
 
-Beställning och produktplanering
+#### Beställning och produktplanering
 
-Leverans
+#### Leverans
 
 ## Outline
 
