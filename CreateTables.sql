@@ -1,4 +1,4 @@
-set foreign_key_checks = 0;
+PRAGMA foreign_keys=OFF;
 DROP TABLE IF EXISTS Customers;
 DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Pallets;
@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS Products;
 DROP TABLE IF EXISTS Ingredients;
 DROP TABLE IF EXISTS OrderItems;
 DROP TABLE IF EXISTS RecipeItems;
+PRAGMA foreign_keys=ON;
 
 CREATE TABLE Customers(
 ssn CHAR(12),
