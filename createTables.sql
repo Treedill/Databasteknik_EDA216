@@ -1,3 +1,7 @@
+/* 
+  Skapar alla tabeller
+*/
+
 PRAGMA foreign_keys=OFF;
 DROP TABLE IF EXISTS Customers;
 DROP TABLE IF EXISTS Orders;
