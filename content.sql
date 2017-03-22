@@ -1,4 +1,6 @@
-
+/*
+  Lägger in kundernas namn och address
+*/
 INSERT INTO Customers (customerName, address) VALUES('Finkakor AB', 'Helsingborg');
 INSERT INTO Customers (customerName, address) VALUES('Småbröd AB', 'Malmö');
 INSERT INTO Customers (customerName, address) VALUES('Kaffebröd', 'Landskrona');
@@ -8,6 +10,9 @@ INSERT INTO Customers (customerName, address) VALUES('Partykakor AB', 'Kristians
 INSERT INTO Customers (customerName, address) VALUES('Gastkakor', 'Hässleholm');
 INSERT INTO Customers (customerName, address) VALUES('Skånekakor', 'Perstorp');
 
+/*
+  Lägger in namnen på kakorna
+*/
 
 INSERT INTO Products (cookie) VALUES('Nut ring');
 INSERT INTO Products (cookie) VALUES('Nut cookie');
@@ -16,7 +21,9 @@ INSERT INTO Products (cookie) VALUES('Tango');
 INSERT INTO Products (cookie) VALUES('Almond delight');
 INSERT INTO Products (cookie) VALUES('Berliner');
 
-
+/*
+  Lägger in ingredienserna
+*/
 
 INSERT INTO Ingredients (ingredient) VALUES('Flour');
 INSERT INTO Ingredients (ingredient) VALUES('Butter');
@@ -38,7 +45,9 @@ INSERT INTO Ingredients (ingredient) VALUES('Chopped almonds')
 INSERT INTO Ingredients (ingredient) VALUES('Cinnamon');
 INSERT INTO Ingredients (ingredient) VALUES('Vanilla sugar');
 
-
+/*
+  Lägger in mängden av alla ingredienser i varje kaka
+*/
 
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1, 1, 450);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2, 1, 450);
