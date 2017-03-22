@@ -31,7 +31,7 @@ INSERT INTO Ingredients(ingredient) VALUES('Chocolate');
 INSERT INTO Ingredients(ingredient) VALUES('Marzipan');
 INSERT INTO Ingredients(ingredient) VALUES('Eggs');
 INSERT INTO Ingredients(ingredient) VALUES('Potato starch');
-INSERT INTO Ingredients(ingredient) VALUES('Wheat');
+INSERT INTO Ingredients(ingredient) VALUES('Wheat flour');
 INSERT INTO Ingredients(ingredient) VALUES('Sodium bicarbonate');
 INSERT INTO Ingredients(ingredient) VALUES('Vanilla');
 INSERT INTO Ingredients(ingredient) VALUES('Chopped almonds')
@@ -66,13 +66,13 @@ INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(16,4, 2);
 
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2,5, 400);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(8,5, 270);
-INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(18,5, 279);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(17,5, 279);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1,5, 400);
-INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(19,5, 10);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(18,5, 10);
 
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1,6, 350);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2,6, 250);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(3,6, 100);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(12,6, 50);
-INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(21,6, 5);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(19,6, 5);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(10,6, 50);
