@@ -22,7 +22,7 @@ PRIMARY KEY (ssn)
 CREATE TABLE Orders(
 orderNbr int,
 placedDate date NOT NULL,
-deliverDate date NOT NULL,
+deliveryDate date NOT NULL,
 ssn char(12),
 PRIMARY KEY (orderNbr),
 FOREIGN KEY (ssn) references Customers(ssn)
