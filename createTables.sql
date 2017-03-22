@@ -37,16 +37,18 @@ FOREIGN KEY (orderNbr) references Orders(orderNbr)
 );
 
 CREATE TABLE Products(
+cookieID int auto_increment,
 cookie VARCHAR(30),
-PRIMARY KEY (cookie)
+PRIMARY KEY (cookieID)
 );
 
 CREATE TABLE Ingredients(
+ingredientID int auto_increment,
 ingredient VARCHAR(30),
 amountStorage int,
 deliveryDate date NOT NULL,
 deliveryAmount int,
-PRIMARY KEY (ingridient)
+PRIMARY KEY (ingridientID)
 );
 
 CREATE TABLE OrderItems(
