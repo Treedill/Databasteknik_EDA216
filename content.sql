@@ -40,3 +40,39 @@ INSERT INTO Ingredients(ingredient) VALUES('Vanilla sugar');
 
 
 INSERT INTO RecipeItems (
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1, 1, 450);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2, 1, 450);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(3, 1, 190);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(4, 1, 225);
+
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(5, 2, 750);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(6, 2, 625);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(7, 2, 125);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(8, 2, 375);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(9, 2, 350);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(10, 2, 50);
+
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(11,3, 750);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2,3, 250);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(12,3, 250);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(13,3, 25);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(14,3, 25);
+
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2,4, 200);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(8,4, 250);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1,4, 300);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(15,4, 4);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(16,4, 2);
+
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2,5, 400);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(8,5, 270);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(18,5, 279);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1,5, 400);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(19,5, 10);
+
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1,6, 350);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2,6, 250);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(3,6, 100);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(12,6, 50);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(21,6, 5);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(10,6, 50);
