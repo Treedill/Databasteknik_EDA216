@@ -31,6 +31,9 @@ recipeItems(amount, **_ingredientID_, _cookieID_**)
 orderItems(nbrPallets, **_orderNbr_, _cookieID_**)
 
 
+Det finns inga funktionella beroenden förutom nyckelberoendena. Därför är relationerna i BCNF.
+
+
 ## SQL statements to create all tables, views, stored procedures, and other database elements. (Don’t include statements to create the initial contents of the database.)
 
 ## Användarmanual
