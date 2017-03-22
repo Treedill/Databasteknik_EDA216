@@ -15,19 +15,19 @@ ER-diagram
 
 Relationer
 
-customers(ssn, customerName, address)
+customers(**ssn**, customerName, address)
 
-orders(orderNbr, placedDate, deliveryDate, *ssn*)
+orders(**orderNbr**, placedDate, deliveryDate, *ssn*)
 
-pallets(palletID, dateProduced, isBlocked, dateDelivered, *cookieID*, *orderNbr*)
+pallets(**palletID**, dateProduced, isBlocked, dateDelivered, *cookieID*, *orderNbr*)
 
-products(cookieID, cookie)
+products(**cookieID**, cookie)
 
-ingredients(ingredientID, amountStorage, deliveryDate, deliveryAmount)
+ingredients(**ingredientID**, amountStorage, deliveryDate, deliveryAmount)
 
-recipeItems(amount, *ingredientID*, *cookieID*)
+recipeItems(**amount, *ingredientID*, *cookieID**)
 
-orderItems(nbrPallets, *orderNbr*, *cookieID*)
+orderItems(**nbrPallets, *orderNbr*, *cookieID**)
 
 
 SQL statements to create all tables, views, stored procedures, and other database elements. (Don’t include statements to create the initial contents of the database.)
