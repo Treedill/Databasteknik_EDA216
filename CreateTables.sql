@@ -61,7 +61,7 @@ CREATE TABLE RecipeItems(
 amount int,
 ingredient VARCHAR(30),
 cookie VARCHAR(30),
-PRIMARY KEY (amount, ingredient, cookie)
+PRIMARY KEY (amount, ingredient, cookie),
 FOREIGN KEY (ingredient) references Ingredients(ingredient),
 FOREIGN KEY (cookie) references Products(cookie)
 );
