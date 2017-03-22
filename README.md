@@ -6,9 +6,20 @@ Johannes Törnblom, dic15jto@student.lu.se, C15
 Jenny Martinsson, dic15jma@student.lu.se, C15
 
 ## Introduktion
-Projektet handlar om att göra ett databassystem åt Krusty Kookies Sweden AB. Vi ska implementera en databas och ett användargränssnitt som hanterar allting som rör produktion, blockering och sökning av "pallets".
+Projektet handlar om att göra ett databassystem åt Krusty Kookies Sweden AB. Vi ska implementera en databas och ett användargränssnitt som hanterar allting som rör produktion, blockering och sökning av pallar.
 
 ## Noteringar om vilka krav vi uppfyller/inte uppfyller
+Produktion
+
+Råmaterial
+
+Recept
+
+Producerade pallar
+
+Beställning och produktplanering
+
+Leverans
 
 ## Outline
 
