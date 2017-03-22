@@ -52,7 +52,7 @@ pallets(**palletID**, dateProduced, isBlocked, dateDelivered, *cookieID*, *order
 
 products(**cookieID**, cookie)
 
-ingredients(**ingredientID**, amountStorage, deliveryDate, deliveryAmount)
+ingredients(**ingredientID**,ingredient, amountStorage, deliveryDate, deliveryAmount)
 
 recipeItems(amount, **_ingredientID_, _cookieID_**)
 
