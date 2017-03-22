@@ -18,28 +18,28 @@ INSERT INTO Products (cookie) VALUES('Berliner');
 
 
 
-INSERT INTO Ingredients(ingredient) VALUES('Flour');
-INSERT INTO Ingredients(ingredient) VALUES('Butter');
-INSERT INTO Ingredients(ingredient) VALUES('Icing sugar');
-INSERT INTO Ingredients(ingredient) VALUES('Roasted, chopped nuts');
-INSERT INTO Ingredients(ingredient) VALUES('Fine-ground nuts');
-INSERT INTO Ingredients(ingredient) VALUES('Ground, roasted nuts');
-INSERT INTO Ingredients(ingredient) VALUES('Bread crumbs');
-INSERT INTO Ingredients(ingredient) VALUES('Sugar');
-INSERT INTO Ingredients(ingredient) VALUES('Egg whites');
-INSERT INTO Ingredients(ingredient) VALUES('Chocolate');
-INSERT INTO Ingredients(ingredient) VALUES('Marzipan');
-INSERT INTO Ingredients(ingredient) VALUES('Eggs');
-INSERT INTO Ingredients(ingredient) VALUES('Potato starch');
-INSERT INTO Ingredients(ingredient) VALUES('Wheat flour');
-INSERT INTO Ingredients(ingredient) VALUES('Sodium bicarbonate');
-INSERT INTO Ingredients(ingredient) VALUES('Vanilla');
-INSERT INTO Ingredients(ingredient) VALUES('Chopped almonds')
-INSERT INTO Ingredients(ingredient) VALUES('Cinnamon');
-INSERT INTO Ingredients(ingredient) VALUES('Vanilla sugar');
+INSERT INTO Ingredients (ingredient) VALUES('Flour');
+INSERT INTO Ingredients (ingredient) VALUES('Butter');
+INSERT INTO Ingredients (ingredient) VALUES('Icing sugar');
+INSERT INTO Ingredients (ingredient) VALUES('Roasted, chopped nuts');
+INSERT INTO Ingredients (ingredient) VALUES('Fine-ground nuts');
+INSERT INTO Ingredients (ingredient) VALUES('Ground, roasted nuts');
+INSERT INTO Ingredients (ingredient) VALUES('Bread crumbs');
+INSERT INTO Ingredients (ingredient) VALUES('Sugar');
+INSERT INTO Ingredients (ingredient) VALUES('Egg whites');
+INSERT INTO Ingredients (ingredient) VALUES('Chocolate');
+INSERT INTO Ingredients (ingredient) VALUES('Marzipan');
+INSERT INTO Ingredients (ingredient) VALUES('Eggs');
+INSERT INTO Ingredients (ingredient) VALUES('Potato starch');
+INSERT INTO Ingredients (ingredient) VALUES('Wheat flour');
+INSERT INTO Ingredients (ingredient) VALUES('Sodium bicarbonate');
+INSERT INTO Ingredients (ingredient) VALUES('Vanilla');
+INSERT INTO Ingredients (ingredient) VALUES('Chopped almonds')
+INSERT INTO Ingredients (ingredient) VALUES('Cinnamon');
+INSERT INTO Ingredients (ingredient) VALUES('Vanilla sugar');
 
 
-INSERT INTO RecipeItems (
+
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1, 1, 450);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2, 1, 450);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(3, 1, 190);
