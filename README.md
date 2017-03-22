@@ -30,7 +30,6 @@ recipeItems(amount, **_ingredientID_, _cookieID_**)
 
 orderItems(nbrPallets, **_orderNbr_, _cookieID_**)
 
-
 Det finns inga funktionella beroenden förutom nyckelberoendena. Därför är relationerna i BCNF.
 
 
