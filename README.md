@@ -25,9 +25,9 @@ products(**cookieID**, cookie)
 
 ingredients(**ingredientID**, amountStorage, deliveryDate, deliveryAmount)
 
-recipeItems(**amount, *ingredientID*, *cookieID**)
+recipeItems(**amount, _ingredientID_, _cookieID_**)
 
-orderItems(**nbrPallets, *orderNbr*, *cookieID**)
+orderItems(**nbrPallets, _orderNbr_, _cookieID_**)
 
 
 SQL statements to create all tables, views, stored procedures, and other database elements. (Don’t include statements to create the initial contents of the database.)
