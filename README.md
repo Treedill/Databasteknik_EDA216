@@ -39,7 +39,7 @@ Projektet handlar om att göra ett databassystem åt Krusty Kookies Sweden AB. V
 
 >When the loading bill has been printed, the data regarding delivered pallets must be updated with customer data and date of delivery.
 ## Outline
-
+Vi har använt oss av SQLite för vår databas, och en javaapplication som kommunicerar med vår databas genom JDBC. 
 ## ER-diagram
 
 ## Relationer
