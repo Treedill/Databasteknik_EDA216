@@ -30,7 +30,7 @@ FOREIGN KEY (ssn) references Customers(ssn)
 
 CREATE TABLE Pallets(
 palletID int,
-dateProduced date NOT NULL,
+dateProduced datetime NOT NULL,
 isBlocked int,
 dateDelivered date NOT NULL,
 cookie VARCHAR(30),
