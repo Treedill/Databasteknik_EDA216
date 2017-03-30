@@ -41,7 +41,7 @@ INSERT INTO Ingredients (ingredient) VALUES('Potato starch');
 INSERT INTO Ingredients (ingredient) VALUES('Wheat flour');
 INSERT INTO Ingredients (ingredient) VALUES('Sodium bicarbonate');
 INSERT INTO Ingredients (ingredient) VALUES('Vanilla');
-INSERT INTO Ingredients (ingredient) VALUES('Chopped almonds')
+INSERT INTO Ingredients (ingredient) VALUES('Chopped almonds');
 INSERT INTO Ingredients (ingredient) VALUES('Cinnamon');
 INSERT INTO Ingredients (ingredient) VALUES('Vanilla sugar');
 
