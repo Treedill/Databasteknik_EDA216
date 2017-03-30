@@ -75,7 +75,7 @@ INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(16,4, 2);
 
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(2,5, 400);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(8,5, 270);
-INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(17,5, 279);
+INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(17,5, 270);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(1,5, 400);
 INSERT INTO RecipeItems (ingredientID, cookieID, amount) VALUES(18,5, 10);
 
