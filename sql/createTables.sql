@@ -52,7 +52,7 @@ ingredient VARCHAR(30),
 amountStorage int,
 deliveryDate date NOT NULL,
 deliveryAmount int,
-PRIMARY KEY (ingridientID)
+PRIMARY KEY (ingredientID)
 );
 
 CREATE TABLE OrderItems(
@@ -66,10 +66,10 @@ FOREIGN KEY (orderNbr) references Orders(orderNbr)
 
 CREATE TABLE RecipeItems(
 amount int,
-ingredient VARCHAR(30),
-cookie VARCHAR(30),
-PRIMARY KEY (ingredient, cookie),
-FOREIGN KEY (ingredient) references Ingredients(ingredient),
-FOREIGN KEY (cookie) references Products(cookie)
+ingredientID int,
+cookieID int,
+PRIMARY KEY (ingredientID, cookieID),
+FOREIGN KEY (ingredientID) references Ingredients(ingredientID),
+FOREIGN KEY (cookieID) references Products(cookieID)
 );
 
