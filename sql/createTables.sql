@@ -49,9 +49,9 @@ PRIMARY KEY (cookieID)
 CREATE TABLE Ingredients(
 ingredientID int auto_increment,
 ingredient VARCHAR(30),
-amountStorage int,
+amountStorage int DEFAULT 500,
 deliveryDate date NOT NULL,
-deliveryAmount int DEFAULT 500,
+deliveryAmount int,
 PRIMARY KEY (ingredientID)
 );
 
