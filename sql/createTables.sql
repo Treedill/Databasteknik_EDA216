@@ -51,7 +51,7 @@ ingredientID int auto_increment,
 ingredient VARCHAR(30),
 amountStorage int,
 deliveryDate date NOT NULL,
-deliveryAmount int,
+deliveryAmount int DEFAULT 500,
 PRIMARY KEY (ingredientID)
 );
 
