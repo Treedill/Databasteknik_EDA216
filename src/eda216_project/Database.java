@@ -76,13 +76,13 @@ public class Database {
 	}
 
 	public Set<String> getCookiePallets(String cookie) {
-		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE cookie =" + cookie;
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE cookie =\"" + cookie + "\";";
 		return getSet(sql);
 	}
 
 	public Set<String> getDatePallets(String date1, String date2) {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + " AND dateProduced <= "
-				+ date2;
+				+ date2 + "\";";
 		return getSet(sql);
 	}
 
@@ -90,12 +90,34 @@ public class Database {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE isBlocked = 1";
 		return getSet(sql);
 	}
-
+	
+	//måste göra joins
 	public Set<String> getCustomerPallets(String customer) {
 		String sql = "SELECT palletID" + " FROM Pallets";
 		return getSet(sql);
 	}
 
+	public String isBlocked(String palletID) {
+		String sql = "SELECT isBlocked " + " FROM Pallets " + " WHERE palletID =\"" + palletID + "\";";
+		if (getField(sql) == "1") {
+			return "BLOCKED";
+		} else {
+			return "Not blocked";
+		}
+	}
+	
+	public String getCookie(String palletID) {
+		String sql = "SELECT cookie" + " FROM Pallets" + " WHERE palletID =\"" + palletID + "\";";
+		return getField(sql);
+	}
+	
+	//Måste göra joins
+	public String getCustomer(String palletID){
+//		String sql = "SELECT ";
+//		return getField(sql);
+		return null;
+	}
+	
 	public Optional<Integer> blockPallet(String palletID) {
 		return Optional.empty();
 	}
@@ -104,8 +126,8 @@ public class Database {
 		return Optional.empty();
 	}
 
-	public String getPalletDateProduced(String cookie) {
-		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
+	public String getPalletDateProduced(String palletID) {
+		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE palletID=\"" + palletID + "\";";
 		return getField(sql);
 	}
 
@@ -130,7 +152,6 @@ public class Database {
 		String field = null;
 		Set<String> set = getSet(sql);
 		if (set.size() == 1) {
-			// Enda sÃ¤ttet att ta ut nÃ¥t frÃ¥n ett set
 			Iterator<String> itr = set.iterator();
 			field = itr.next();
 		}
