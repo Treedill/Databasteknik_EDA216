@@ -102,22 +102,21 @@ public class SearchingPallets extends BasicPane {
 
 		String[] texts = new String[1];
 		String[] texts2 = new String[1];
-		texts[0] = inputBoxName;
-		texts2[0] = "Last date";
+		texts[0] = "1st date";
+		texts2[0] = inputBoxName;
 		fields = new JTextField[1];
-		fields[0] = new JTextField(2);
+		fields[0] = new JTextField(4);
 		fields2 = new JTextField[1];
-		fields2[0] = new JTextField(2);
-		p2 = new InputPanel(texts, fields);
-		p3 = new InputPanel(texts2, fields2);
-		// p2.setSize(10, 1);
+		fields2[0] = new JTextField(4);
+		p2 = new InputPanel(texts2, fields2);
+		p3 = new InputPanel(texts, fields);
 		p2.setVisible(false);
 		p3.setVisible(false);
 		p.setLayout(new GridLayout(2, 1));
 		p.add(new JLabel("Search by:"));
 		p.add(p1);
-		p.add(p2);
 		p.add(p3);
+		p.add(p2);
 		return p;
 	}
 
@@ -153,7 +152,7 @@ public class SearchingPallets extends BasicPane {
 			messageLabel.setText(" ");
 			if (choice == "Time span") {
 				p3.setVisible(true);
-				inputBoxName = "First Date";
+				inputBoxName = "2nd Date";
 				searching = 1;
 			} else if (choice == "Pallet ID") {
 				inputBoxName = "Pallet ID";
