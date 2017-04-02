@@ -67,3 +67,7 @@ Det finns inga funktionella beroenden förutom nyckelberoendena. Därför är re
 För att se de skapade tabellerna, titta på createTables.sql.
 
 ## Användarmanual
+Lägg till JDBC i referenced libraries efter nedladdning av projektet.
+I "Produce Pallets" skriver du in namnet på produkten du vill skapa. Produktens namn, ID och produktions datum står till höger.
+I "Block Pallets" skriver du in produktens namn och tidsspannet som du vill blocka i nedanstående rutor.
+I "Search Pallets" väljer du först vad du vill söka via. Du skriver sedan in ID/Tid/Kund/Produkt som du vill söka på. För blocked behöver du bara trycka sök så kommer alla blockerade pallar upp. Du får upp en lista över alla pallar som är under sökrestriktionen, och klickar du på ID:t så kommer det upp mer information till höger.
