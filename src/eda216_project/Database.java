@@ -65,30 +65,49 @@ public class Database {
 		return conn != null;
 	}
 
-	public Set<String> getPalletID(){
+	public Set<String> getPalletID() {
 		String sql = "SELECT palletID" + " FROM Pallets";
 		return getSet(sql);
 	}
-	
-	public Set<String> getCookieName(){
+
+	public Set<String> getCookieName() {
 		String sql = "SELECT cookie" + " FROM Products";
 		return getSet(sql);
 	}
-	
-	public Optional<Integer> blockPallet(String palletID){
+
+	public Set<String> getCookiePallets(String cookie) {
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE cookie =" + cookie;
+		return getSet(sql);
+	}
+
+	public Set<String> getDatePallets(String date1, String date2) {
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + " AND dateProduced <= "
+				+ date2;
+		return getSet(sql);
+	}
+
+	public Set<String> getBlockedPallets() {
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE isBlocked = 1";
+		return getSet(sql);
+	}
+
+	public Set<String> getCustomerPallets(String customer) {
+		String sql = "SELECT palletID" + " FROM Pallets";
+		return getSet(sql);
+	}
+
+	public Optional<Integer> blockPallet(String palletID) {
 		return Optional.empty();
 	}
-	
-	public Optional<Integer> producePallet(){
+
+	public Optional<Integer> producePallet() {
 		return Optional.empty();
 	}
-	
-	public String getPalletDateProduced(String cookie){
+
+	public String getPalletDateProduced(String cookie) {
 		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
 		return getField(sql);
 	}
-	
-	
 
 	private Set<String> getSet(String sql) {
 		Set<String> found = new HashSet<>();
@@ -111,7 +130,7 @@ public class Database {
 		String field = null;
 		Set<String> set = getSet(sql);
 		if (set.size() == 1) {
-			// Enda sättet att ta ut nåt från ett set
+			// Enda sÃ¤ttet att ta ut nÃ¥t frÃ¥n ett set
 			Iterator<String> itr = set.iterator();
 			field = itr.next();
 		}
@@ -125,7 +144,7 @@ public class Database {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+
 		}
 		return -1;
 	}
