@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,16 +24,31 @@ public class SearchingPallets extends BasicPane {
 	 * The text field where the user id is entered.
 	 */
 	private JTextField[] fields;
-
+	private JTextField[] fields2;
+	private InputPanel p2;
+	private InputPanel p3;
+	private JPanel p;
+	private String rand;
+	private int searching;
 	/**
-	 * The list model for the movie name list.
+	 * The list model for the name list.
 	 */
 	private DefaultListModel<String> nameListModel;
 
 	/**
-	 * The movie name list.
+	 * The choices list.
 	 */
 	private JList<String> nameList;
+	
+	/**
+	 * The list model for the info list.
+	 */
+	private DefaultListModel<String> infoListModel;
+
+	/**
+	 * The info list.
+	 */
+	private JList<String> infoList;
 
 	/**
 	 * The number of the field where the pallet time is entered.
@@ -57,7 +73,7 @@ public class SearchingPallets extends BasicPane {
 	/**
 	 * The number of the field where the pallet time is entered.
 	 */
-	private static final int PALLET_DELIVERED = 4;
+	private static final int CUSTOMER = 4;
 
 	/**
 	 * The total number of fields in the fields array.
@@ -70,6 +86,7 @@ public class SearchingPallets extends BasicPane {
 	}
 
 	public JComponent createLeftPanel() {
+
 		nameListModel = new DefaultListModel<String>();
 
 		nameList = new JList<String>(nameListModel);
@@ -78,17 +95,30 @@ public class SearchingPallets extends BasicPane {
 		nameList.addListSelectionListener(new NameSelectionListener());
 		JScrollPane p1 = new JScrollPane(nameList);
 
-		// dateListModel = new DefaultListModel<String>();
-		//
-		// dateList = new JList<String>(dateListModel);
-		// dateList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		// dateList.setPrototypeCellValue("123456789012");
-		// dateList.addListSelectionListener(new DateSelectionListener());
-		// JScrollPane p2 = new JScrollPane(dateList);
 		fillNameList();
-		JPanel p = new JPanel();
-		p.setLayout(new GridLayout(1, 2));
+		p = new JPanel();
+		p.setLayout(new GridLayout(2, 1));
+		p.add(new JLabel("Search by:"));
 		p.add(p1);
+		return p;
+	}
+
+	public JComponent createRightBottomPanel() {
+		String[] texts = new String[1];
+		String[] texts2 = new String[1];
+		texts[0] = rand;
+		texts2[0] = "Sista datum";
+		fields = new JTextField[1];
+		fields[0] = new JTextField(2);
+		fields2 = new JTextField[1];
+		fields2[0] = new JTextField(2);
+		p2 = new InputPanel(texts, fields);
+		p3 = new InputPanel(texts2, fields2);
+		// p2.setSize(10, 1);
+		p2.setVisible(false);
+		p3.setVisible(false);
+		p.add(p2);
+		p.add(p3);
 		return p;
 	}
 
@@ -97,15 +127,11 @@ public class SearchingPallets extends BasicPane {
 	 */
 	private void fillNameList() {
 		nameListModel.removeAllElements();
-		nameListModel.addElement("Date");
+		nameListModel.addElement("Time span");
 		nameListModel.addElement("Pallet ID");
 		nameListModel.addElement("Product");
 		nameListModel.addElement("Blocked");
 		nameListModel.addElement("Customer");
-	}
-	
-	private void textBox(String c){
-		
 	}
 
 	/**
@@ -113,7 +139,7 @@ public class SearchingPallets extends BasicPane {
 	 */
 	class NameSelectionListener implements ListSelectionListener {
 		/**
-		 * Called when the user selects a choice in the name list. 
+		 * Called when the user selects a choice in the name list.
 		 * 
 		 * @param e
 		 *            The selected list item.
@@ -123,7 +149,25 @@ public class SearchingPallets extends BasicPane {
 				return;
 			}
 			String choice = nameList.getSelectedValue();
-			textBox(choice);
+			p3.setVisible(false);
+			p2.setVisible(true);
+			if (choice == "Time span") {
+				p3.setVisible(true);
+				rand = "FÃ¶rsta datum";
+				searching = 1;
+			} else if (choice == "Pallet ID") {
+				rand = "Pallet ID";
+				searching = 2;
+			} else if (choice == "Product") {
+				rand = "Product";
+				searching = 3;
+			} else if (choice == "Blocked") {
+				rand = "Blocked";
+				searching = 4;
+			} else if (choice == "Customer") {
+				rand = "Customer";
+				searching = 5;
+			}
 		}
 	}
 
@@ -133,18 +177,40 @@ public class SearchingPallets extends BasicPane {
 	 * @return The top panel.
 	 */
 	public JComponent createTopPanel() {
+
+		infoListModel = new DefaultListModel<String>();
+
+		infoList = new JList<String>(infoListModel);
+		infoList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		infoList.setPrototypeCellValue("123456789012");
+		infoList.addListSelectionListener(new NameSelectionListener());
+		JScrollPane p1 = new JScrollPane(infoList);
+
+		//fillInfoList();
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(1, 2));
+		panel.add(p1);
 		String[] texts = new String[NBR_FIELDS];
 		texts[COOKIE_NAME] = "Product";
 		texts[PALLET_DATE_TIME] = "Date and time";
 		texts[PALLET_ID] = "Pallet ID";
 		texts[PALLET_IS_BLOCKED] = "Blocked";
-		texts[PALLET_DELIVERED] = "Customer";
+		texts[CUSTOMER] = "Customer";
 		fields = new JTextField[NBR_FIELDS];
 		for (int i = 0; i < fields.length; i++) {
 			fields[i] = new JTextField(10);
 			fields[i].setEditable(false);
 		}
-		return new InputPanel(texts, fields);
+		panel.add(new InputPanel(texts, fields));
+		return panel;
+	}
+	
+	private void fillInfoList() {
+		infoListModel.removeAllElements();
+		Set<String> dates = null;
+		for (String d : dates) {
+			infoListModel.addElement(d);
+		}
 	}
 
 	/**
@@ -157,7 +223,7 @@ public class SearchingPallets extends BasicPane {
 		JButton[] buttons = new JButton[1];
 		buttons[0] = new JButton("Search");
 		ActionHandler actHand = new ActionHandler();
-		fields[COOKIE_NAME].addActionListener(actHand);
+		//fields[COOKIE_NAME].addActionListener(actHand);
 		return new ButtonAndMessagePanel(buttons, messageLabel, actHand);
 	}
 
@@ -174,8 +240,29 @@ public class SearchingPallets extends BasicPane {
 		 *            The event object (not used).
 		 */
 		public void actionPerformed(ActionEvent e) {
-			// if(db.getCookieName().contains(cookieName) ||
-			// db.getPalletID().contains(palletID) || db.isBlocked)
+			String palletID = fields[PALLET_ID].getText();
+			String product = fields[COOKIE_NAME].getText();
+			switch (searching) {
+			case 1:
+				
+				break; // optional
+			case 2:
+				if(db.getPalletID().contains(palletID)){
+					
+				}
+				break; // optional
+			case 3: 
+				if(db.getCookieName().contains(product)){
+					
+				}
+				// Statements
+				break; // optional
+			case 4:
+				// Statements
+				break; // optional
+			case 5: // Optional
+				// Statements
+			}
 		}
 
 	}
