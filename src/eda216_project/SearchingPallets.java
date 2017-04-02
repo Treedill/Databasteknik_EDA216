@@ -210,32 +210,36 @@ public class SearchingPallets extends BasicPane {
 		infoListModel.addElement(palletID);
 	}
 
-	private void fillInfoListProduct(String product) {
+	private void fillInfoListProduct(String cookie) {
 		infoListModel.removeAllElements();
-		Set<String> dates = null;
-		for (String d : dates) {
-			infoListModel.addElement(d);
+		Set<String> cookies = db.getCookiePallets(cookie);
+		for (String c : cookies) {
+			infoListModel.addElement(c);
 		}
 	}
 
 	private void fillInfoListCustomer(String customer) {
 		infoListModel.removeAllElements();
-		Set<String> dates = null;
-		for (String d : dates) {
-			infoListModel.addElement(d);
+		Set<String> customers = db.getCustomerPallets(customer);
+		for (String c : customers) {
+			infoListModel.addElement(c);
 		}
 	}
 
 	private void fillInfoListBlocked() {
 		infoListModel.removeAllElements();
-		Set<String> dates = null;
-		for (String d : dates) {
-			infoListModel.addElement(d);
+		Set<String> blocked = db.getBlockedPallets();
+		for (String b : blocked) {
+			infoListModel.addElement(b);
 		}
 	}
 
-	private void fillInfoListDate() {
+	private void fillInfoListDate(String date1, String date2) {
 		infoListModel.removeAllElements();
+		// Set<String> dates = db.getDatePallets(date1,date2);
+		// for(String d : dates){
+		// infoListModel.addElement(d);
+		// }
 		infoListModel.addElement("hej");
 		infoListModel.addElement("då");
 
@@ -246,9 +250,8 @@ public class SearchingPallets extends BasicPane {
 	 */
 	class InfoSelectionListener implements ListSelectionListener {
 		/**
-		 * Called when the user selects a name in the info list. Fetches
-		 * data from the database and displays it in the text
-		 * fields.
+		 * Called when the user selects a name in the info list. Fetches data
+		 * from the database and displays it in the text fields.
 		 * 
 		 * @param e
 		 *            The selected list item.
@@ -260,7 +263,7 @@ public class SearchingPallets extends BasicPane {
 			String customer = "Jenny"; // = db.getCustomer(palletID);
 			String palletID = infoList.getSelectedValue(); // db.getPalletID();
 			String blocked = "ja"; // db.isBlocked(palletID);
-			String date = "2017";//db.getPalletDateProduced(palletID);
+			String date = "2017";// db.getPalletDateProduced(palletID);
 			String cookie = "Nötkaka"; // db.getCookie(palletID);
 			fields[CUSTOMER].setText(customer);
 			fields[PALLET_ID].setText(palletID);
@@ -298,10 +301,10 @@ public class SearchingPallets extends BasicPane {
 		 */
 		public void actionPerformed(ActionEvent e) {
 			String input = p2.toString();
-			String date2 = p3.toString();
+			String dateLast = p3.toString();
 			switch (searching) {
 			case 1:
-				fillInfoListDate();
+				fillInfoListDate(input, dateLast);
 				// if (db.getPalletDate().compareTo(input) >= 0
 				// && db.getPalletDate().compareTo(date2) <= 0) {
 				break; // optional
@@ -309,20 +312,22 @@ public class SearchingPallets extends BasicPane {
 				if (db.getPalletID().contains(input)) {
 					fillInfoListID(input);
 				}
-				break; 
+				break;
 			case 3:
 				if (db.getCookieName().contains(input)) {
 					fillInfoListProduct(input);
 				}
 				// Statements
-				break; 
+				break;
 			case 4:
 				fillInfoListBlocked();
 				break;
-			case 5: 
+			case 5:
 				// if(db.getCustomer().contains(customer)){
-				// fillInfoListCustomer();
+				// fillInfoListCustomer(input);
 				// }
+				
+			default: messageLabel.setText("There are no products with that " + inputBoxName);
 			}
 		}
 
