@@ -1,6 +1,8 @@
 package eda216_project;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Set;
@@ -97,13 +99,7 @@ public class SearchingPallets extends BasicPane {
 
 		fillNameList();
 		p = new JPanel();
-		p.setLayout(new GridLayout(2, 1));
-		p.add(new JLabel("Search by:"));
-		p.add(p1);
-		return p;
-	}
 
-	public JComponent createRightBottomPanel() {
 		String[] texts = new String[1];
 		String[] texts2 = new String[1];
 		texts[0] = inputBoxName;
@@ -117,6 +113,9 @@ public class SearchingPallets extends BasicPane {
 		// p2.setSize(10, 1);
 		p2.setVisible(false);
 		p3.setVisible(false);
+		p.setLayout(new GridLayout(2, 1));
+		p.add(new JLabel("Search by:"));
+		p.add(p1);
 		p.add(p2);
 		p.add(p3);
 		return p;
@@ -151,6 +150,7 @@ public class SearchingPallets extends BasicPane {
 			String choice = nameList.getSelectedValue();
 			p3.setVisible(false);
 			p2.setVisible(true);
+			messageLabel.setText(" ");
 			if (choice == "Time span") {
 				p3.setVisible(true);
 				inputBoxName = "First Date";
@@ -187,6 +187,7 @@ public class SearchingPallets extends BasicPane {
 		JScrollPane p1 = new JScrollPane(infoList);
 
 		// fillInfoList();
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 2));
 		panel.add(p1);
@@ -305,31 +306,38 @@ public class SearchingPallets extends BasicPane {
 			switch (searching) {
 			case 1:
 				fillInfoListDate(input, dateLast);
-				// if (db.getPalletDate().compareTo(input) >= 0
-				// && db.getPalletDate().compareTo(date2) <= 0) {
-				break; // optional
+				if (infoList.getModel().getSize() == 0) {
+					messageLabel.setText("There are no pallets produced within that date");
+				}
+				break;
 			case 2:
 				if (db.getPalletID().contains(input)) {
 					fillInfoListID(input);
+				} else {
+					messageLabel.setText("There are no pallets with that ID");
 				}
 				break;
 			case 3:
 				if (db.getCookieName().contains(input)) {
 					fillInfoListProduct(input);
+				} else {
+					messageLabel.setText("There are no pallets with that cookie");
 				}
-				// Statements
 				break;
 			case 4:
 				fillInfoListBlocked();
+				if (infoList.getModel().getSize() == 0) {
+					messageLabel.setText("There are no pallets that are blocked");
+				}
 				break;
 			case 5:
 				// if(db.getCustomer().contains(customer)){
 				// fillInfoListCustomer(input);
+				// }else {
+				// messageLabel.setText("There are no pallets with that
+				// customer");
 				// }
-				
-			default: messageLabel.setText("There are no products with that " + inputBoxName);
 			}
 		}
-
 	}
 }
