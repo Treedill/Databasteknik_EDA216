@@ -91,9 +91,15 @@ public class Database {
 		return getSet(sql);
 	}
 	
+	public Set<String> getCustomers(){
+		String sql = "SELECT customer" + " FROM Customers";
+		return getSet(sql);
+	}
+	
 	//måste göra joins
 	public Set<String> getCustomerPallets(String customer) {
 		String sql = "SELECT palletID" + " FROM Pallets";
+		//Where customer = customer
 		return getSet(sql);
 	}
 
