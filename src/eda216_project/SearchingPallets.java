@@ -330,12 +330,11 @@ public class SearchingPallets extends BasicPane {
 				}
 				break;
 			case 5:
-				// if(db.getCustomer().contains(customer)){
-				// fillInfoListCustomer(input);
-				// }else {
-				// messageLabel.setText("There are no pallets with that
-				// customer");
-				// }
+				if (db.getCustomers().contains(input)) {
+					fillInfoListCustomer(input);
+				} else {
+					messageLabel.setText("There are no pallets with that customer");
+				}
 			}
 		}
 	}
