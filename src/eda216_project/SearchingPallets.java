@@ -260,11 +260,11 @@ public class SearchingPallets extends BasicPane {
 			if (nameList.isSelectionEmpty() || infoList.isSelectionEmpty()) {
 				return;
 			}
-			String customer = "Jenny"; // = db.getCustomer(palletID);
-			String palletID = infoList.getSelectedValue(); // db.getPalletID();
-			String blocked = "ja"; // db.isBlocked(palletID);
-			String date = "2017";// db.getPalletDateProduced(palletID);
-			String cookie = "Nötkaka"; // db.getCookie(palletID);
+			String palletID = infoList.getSelectedValue();
+			String customer = db.getCustomer(palletID);
+			String blocked = db.isBlocked(palletID);
+			String date = db.getPalletDateProduced(palletID);
+			String cookie = db.getCookie(palletID);
 			fields[CUSTOMER].setText(customer);
 			fields[PALLET_ID].setText(palletID);
 			fields[PALLET_IS_BLOCKED].setText(blocked);
