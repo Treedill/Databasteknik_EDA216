@@ -112,7 +112,6 @@ public class Database {
 	
 	public String isBlocked(String palletID) {
 		String sql = "SELECT isBlocked " + " FROM Pallets " + " WHERE palletID =\"" + palletID + "\";";
-		System.out.println(getField(sql));
 		if (getField(sql).contains("1")) {
 			return "BLOCKED";
 		} else {
