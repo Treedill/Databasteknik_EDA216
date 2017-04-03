@@ -79,10 +79,10 @@ public class Database {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE cookie =\"" + cookie + "\";";
 		return getSet(sql);
 	}
-
+	//krånglar
 	public Set<String> getDatePallets(String date1, String date2) {
-		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + " AND dateProduced <= "
-				+ date2 + "\";";
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + 
+		"\" AND dateProduced <= " + date2 + "\";";
 		return getSet(sql);
 	}
 
@@ -96,19 +96,20 @@ public class Database {
 		return getSet(sql);
 	}
 	
-	//måste göra joins
+	//måste göra joins med både Orders och Pallets
 	public Set<String> getCustomerPallets(String customer) {
 		String sql = "SELECT palletID" + " FROM Pallets";
 		//Where customer = customer
 		return getSet(sql);
 	}
-
+	
+	//returnerar alltid "BLOCKED"
 	public String isBlocked(String palletID) {
 		String sql = "SELECT isBlocked " + " FROM Pallets " + " WHERE palletID =\"" + palletID + "\";";
 		if (getField(sql) == "1") {
-			return "BLOCKED";
+			return "Not Blocked";
 		} else {
-			return "Not blocked";
+			return "BLOCKED";
 		}
 	}
 	
@@ -117,21 +118,24 @@ public class Database {
 		return getField(sql);
 	}
 	
-	//Måste göra joins
+	//Måste göra joins med Pallets och Orders
 	public String getCustomer(String palletID){
 //		String sql = "SELECT ";
 //		return getField(sql);
 		return null;
 	}
 	
+	//kod
 	public Optional<Integer> blockPallet(String palletID) {
 		return Optional.empty();
 	}
-
+	
+	//kod
 	public Optional<Integer> producePallet() {
 		return Optional.empty();
 	}
-
+	
+	//ger random nummer
 	public String getPalletDateProduced(String palletID) {
 		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE palletID=\"" + palletID + "\";";
 		return getField(sql);
