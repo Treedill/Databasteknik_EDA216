@@ -106,10 +106,11 @@ public class Database {
 	//returnerar alltid "BLOCKED"
 	public String isBlocked(String palletID) {
 		String sql = "SELECT isBlocked " + " FROM Pallets " + " WHERE palletID =\"" + palletID + "\";";
+		System.out.println(getField(sql));
 		if (getField(sql) == "1") {
-			return "Not Blocked";
-		} else {
 			return "BLOCKED";
+		} else {
+			return "Not Blocked";
 		}
 	}
 	
@@ -138,6 +139,11 @@ public class Database {
 	//ger random nummer
 	public String getPalletDateProduced(String palletID) {
 		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE palletID=\"" + palletID + "\";";
+		return getField(sql);
+	}
+	
+	public String getCookieDateProduced(String cookie) {
+		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
 		return getField(sql);
 	}
 
