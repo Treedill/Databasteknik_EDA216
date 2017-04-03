@@ -110,11 +110,10 @@ public class Database {
 		return getSet(sql);
 	}
 	
-	//returnerar alltid "BLOCKED"
 	public String isBlocked(String palletID) {
 		String sql = "SELECT isBlocked " + " FROM Pallets " + " WHERE palletID =\"" + palletID + "\";";
 		System.out.println(getField(sql));
-		if (getField(sql) == "1") {
+		if (getField(sql).contains("1")) {
 			return "BLOCKED";
 		} else {
 			return "Not Blocked";
