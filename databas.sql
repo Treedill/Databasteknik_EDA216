@@ -43,7 +43,7 @@ FOREIGN KEY (orderNbr) references Orders(orderNbr)
 CREATE TABLE Products(
 cookieID int auto_increment,
 cookie VARCHAR(30),
-PRIMARY KEY (cookieID)
+PRIMARY KEY (cookie)
 );
 
 CREATE TABLE Ingredients(
@@ -52,7 +52,7 @@ ingredient VARCHAR(30),
 amountStorage int DEFAULT 500,
 deliveryDate date,
 deliveryAmount int,
-PRIMARY KEY (ingredientID)
+PRIMARY KEY (ingredient)
 );
 
 CREATE TABLE OrderItems(
@@ -66,11 +66,11 @@ FOREIGN KEY (orderNbr) references Orders(orderNbr)
 
 CREATE TABLE RecipeItems(
 amount int,
-ingredientID int,
-cookieID int,
-PRIMARY KEY (ingredientID, cookieID),
-FOREIGN KEY (ingredientID) references Ingredients(ingredientID),
-FOREIGN KEY (cookieID) references Products(cookieID)
+ingredient VARCHAR(30),
+cookie VARCHAR(30),
+PRIMARY KEY (ingredient, cookie),
+FOREIGN KEY (ingredient) references Ingredients(ingredient),
+FOREIGN KEY (cookie) references Products(cookie)
 );
 
 /*
@@ -119,4 +119,25 @@ INSERT INTO Ingredients (ingredient) VALUES('Vanilla');
 INSERT INTO Ingredients (ingredient) VALUES('Chopped almonds');
 INSERT INTO Ingredients (ingredient) VALUES('Cinnamon');
 INSERT INTO Ingredients (ingredient) VALUES('Vanilla sugar');
+
+INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
+VALUES (1, 2016-03-08, 1, 2016-03-08, 'Nut ring');
+INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
+VALUES (2, 2016-03-08, 0, 2016-03-08, 'Nut ring');
+INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
+VALUES (3, 2019-03-08, 1, 2019-03-08, 'Berliner');
+INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
+VALUES (4, 2019-03-08, 0, 2016-03-09, 'Tango');
+INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
+VALUES (5, 2016-03-08, 0, 2016-03-08, 'Nut cookie');
+
+/*
+Kraschar inte längre men borde inte vara så..
+*/
+
+INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Flour','Nut ring' , 450);
+INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Butter', 'Nut ring', 450);
+INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Icing sugar', 'Nut ring', 190);
+INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Roasted, chopped nuts', 'Nut ring', 225);
+
 
