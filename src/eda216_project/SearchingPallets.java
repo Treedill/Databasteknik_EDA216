@@ -26,11 +26,9 @@ public class SearchingPallets extends BasicPane {
 	 * The text field where the user id is entered.
 	 */
 	private JTextField[] fields;
-	private JTextField[] fields2;
-	private InputPanel p2;
-	private InputPanel p3;
+	private JTextField field1;
+	private JTextField field2;
 	private JPanel p;
-	private String inputBoxName;
 	private int searching;
 	/**
 	 * The list model for the name list.
@@ -99,24 +97,16 @@ public class SearchingPallets extends BasicPane {
 
 		fillNameList();
 		p = new JPanel();
-
-		String[] texts = new String[1];
-		String[] texts2 = new String[1];
-		texts[0] = "1st date";
-		texts2[0] = inputBoxName;
-		fields = new JTextField[1];
-		fields[0] = new JTextField(4);
-		fields2 = new JTextField[1];
-		fields2[0] = new JTextField(4);
-		p2 = new InputPanel(texts2, fields2);
-		p3 = new InputPanel(texts, fields);
-		p2.setVisible(false);
-		p3.setVisible(false);
+		field1 = new JTextField();
+		field2 = new JTextField();
+		field1.setVisible(false);
+		field2.setVisible(false);
+		field2.setText("1st Date");
 		p.setLayout(new GridLayout(2, 1));
 		p.add(new JLabel("Search by:"));
 		p.add(p1);
-		p.add(p3);
-		p.add(p2);
+		p.add(field2);
+		p.add(field1);
 		return p;
 	}
 
@@ -147,24 +137,24 @@ public class SearchingPallets extends BasicPane {
 				return;
 			}
 			String choice = nameList.getSelectedValue();
-			p3.setVisible(false);
-			p2.setVisible(true);
+			field2.setVisible(false);
+			field1.setVisible(true);
 			messageLabel.setText(" ");
 			if (choice == "Time span") {
-				p3.setVisible(true);
-				inputBoxName = "2nd Date";
+				field2.setVisible(true);
+				field1.setText("2nd Date");
 				searching = 1;
 			} else if (choice == "Pallet ID") {
-				inputBoxName = "Pallet ID";
+				field1.setText("Pallet ID");
 				searching = 2;
 			} else if (choice == "Product") {
-				inputBoxName = "Product";
+				field1.setText("Product");
 				searching = 3;
 			} else if (choice == "Blocked") {
-				inputBoxName = "Blocked";
+				field1.setText("Blocked");
 				searching = 4;
 			} else if (choice == "Customer") {
-				inputBoxName = "Customer";
+				field1.setText("Customer");
 				searching = 5;
 			}
 		}
@@ -236,12 +226,10 @@ public class SearchingPallets extends BasicPane {
 
 	private void fillInfoListDate(String date1, String date2) {
 		infoListModel.removeAllElements();
-		// Set<String> dates = db.getDatePallets(date1,date2);
-		// for(String d : dates){
-		// infoListModel.addElement(d);
-		// }
-		infoListModel.addElement("hej");
-		infoListModel.addElement("då");
+		Set<String> dates = db.getDatePallets(date1, date2);
+		for (String d : dates) {
+			infoListModel.addElement(d);
+		}
 
 	}
 
@@ -261,9 +249,9 @@ public class SearchingPallets extends BasicPane {
 				return;
 			}
 			String palletID = infoList.getSelectedValue();
-			String customer = db.getCustomer(palletID);
+			String customer = db.getCustomer(palletID);			//vet inte om den funkar
 			String blocked = db.isBlocked(palletID);
-			String date = db.getPalletDateProduced(palletID);
+			String date = db.getPalletDateProduced(palletID); 			//ger nr 2008 och 2005??
 			String cookie = db.getCookie(palletID);
 			fields[CUSTOMER].setText(customer);
 			fields[PALLET_ID].setText(palletID);
@@ -300,8 +288,8 @@ public class SearchingPallets extends BasicPane {
 		 *            The event object (not used).
 		 */
 		public void actionPerformed(ActionEvent e) {
-			String input = p2.toString();
-			String dateLast = p3.toString();
+			String input = field1.getText();
+			String dateLast = field2.getText();
 			switch (searching) {
 			case 1:
 				fillInfoListDate(input, dateLast);
