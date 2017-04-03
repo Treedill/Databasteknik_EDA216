@@ -79,6 +79,13 @@ public class Database {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE cookie =\"" + cookie + "\";";
 		return getSet(sql);
 	}
+	
+	//kommer krångla
+	public Set<String> getCookieDatePallets(String cookie, String date1, String date2){
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + 
+		"\" AND dateProduced <= " + date2 + "\" AND cookie = " + cookie + "\";";
+		return getSet(sql);
+	}
 	//krånglar
 	public Set<String> getDatePallets(String date1, String date2) {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + 
@@ -133,6 +140,10 @@ public class Database {
 	
 	//kod
 	public Optional<Integer> producePallet() {
+		return Optional.empty();
+	}
+	
+	public Optional<Integer> updateIngrediens(){
 		return Optional.empty();
 	}
 	
