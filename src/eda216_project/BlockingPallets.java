@@ -2,6 +2,7 @@ package eda216_project;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -86,17 +87,23 @@ public class BlockingPallets extends BasicPane {
 		 */
 		public void actionPerformed(ActionEvent e) {
 			String cookieName = fields[COOKIE_NAME].getText();
-			String palletStartTime = fields[PALLET_START_TIME].getText();
-			String palletEndTime = fields[PALLET_END_TIME].getText();
+			String date1 = fields[PALLET_START_TIME].getText();
+			String date2 = fields[PALLET_END_TIME].getText();
+			Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
+			int palletStartTime = Integer.parseInt(date1);
+			int date = Integer.parseInt(db.getCookieDateProduced(cookieName));
+			int palletEndTime = Integer.parseInt(date2);
 			if (db.getCookieName().contains(cookieName)) {
-				if (db.getPalletDateProduced(cookieName).compareTo(palletStartTime) >= 0
-						&& db.getPalletDateProduced(cookieName).compareTo(palletEndTime) <= 0) {
-					//blockPallet
-					messageLabel.setText("Pallet with ID " + cookieName + "is blocked");
-				}else{
-					messageLabel.setText("There was no pallets produced within this time span with the product: " + cookieName);
+				if (date >= palletStartTime && date <= palletEndTime) {
+					for(String p : pallets){
+						db.blockPallet(p);
+						messageLabel.setText("Pallet with ID " + p + " is blocked");
+					}
+				} else {
+					messageLabel.setText(
+							"There was no pallets produced within this time span with the product: " + cookieName);
 				}
-			}else{
+			} else {
 				messageLabel.setText("There are no cookies with that name");
 			}
 		}
