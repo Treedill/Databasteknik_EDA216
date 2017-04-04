@@ -110,17 +110,21 @@ public class ProducingPallets extends BasicPane {
 			String time = nowT.toString();
 			Optional<Integer> produce = db.producePallet(cookieName);
 			Set<String> ingredients = db.getIngredients(cookieName);
+			Set<String> amount = db.getAmountInStorage();
 			if (db.getCookieName().contains(cookieName)) {
 				if (produce.isPresent()) {
 					String palletID = Integer.toString(produce.get());
-					for(String ingredient : ingredients){
+					for (String ingredient : ingredients) {
 						db.updateIngrediens(db.getIngredientAmount(ingredient), ingredient);
+						fields[DATE_TIME].setText(date + " " + time);
+						fields[PALLET_ID].setText(palletID);
 					}
-					fields[DATE_TIME].setText(date + " " + time);
-					fields[PALLET_ID].setText(palletID);
+					for (String a : amount) {
+						System.out.println(a);
+					}
+				} else {
+					messageLabel.setText("There are no cookies with that name");
 				}
-			} else {
-				messageLabel.setText("There are no cookies with that name");
 			}
 		}
 	}
