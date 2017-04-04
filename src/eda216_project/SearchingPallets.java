@@ -1,5 +1,6 @@
 package eda216_project;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
@@ -101,7 +102,7 @@ public class SearchingPallets extends BasicPane {
 		field2 = new JTextField();
 		field1.setVisible(false);
 		field2.setVisible(false);
-		field2.setText("1st Date");
+		field2.setText("2003");
 		p.setLayout(new GridLayout(2, 1));
 		p.add(new JLabel("Search by:"));
 		p.add(p1);
@@ -142,19 +143,19 @@ public class SearchingPallets extends BasicPane {
 			messageLabel.setText(" ");
 			if (choice == "Time span") {
 				field2.setVisible(true);
-				field1.setText("2nd Date");
+				field1.setText("2009");
 				searching = 1;
 			} else if (choice == "Pallet ID") {
-				field1.setText("Pallet ID");
+				field1.setText("1");
 				searching = 2;
 			} else if (choice == "Product") {
-				field1.setText("Product");
+				field1.setText("Nut ring");
 				searching = 3;
 			} else if (choice == "Blocked") {
 				field1.setText("Blocked");
 				searching = 4;
 			} else if (choice == "Customer") {
-				field1.setText("Customer");
+				field1.setText("Finkakor AB");
 				searching = 5;
 			}
 		}
@@ -322,7 +323,8 @@ public class SearchingPallets extends BasicPane {
 			case 5:
 				if (db.getCustomers().contains(input)) {
 					fillInfoListCustomer(input);
-				} else {
+				}
+				if (infoList.getModel().getSize() == 0) {
 					messageLabel.setText("There are no pallets with that customer");
 				}
 			}
