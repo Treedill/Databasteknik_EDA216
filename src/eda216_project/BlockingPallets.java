@@ -89,7 +89,8 @@ public class BlockingPallets extends BasicPane {
 			String cookieName = fields[COOKIE_NAME].getText();
 			String date1 = fields[PALLET_START_TIME].getText();
 			String date2 = fields[PALLET_END_TIME].getText();
-			Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
+			//Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
+			Set<String> pallets= db.getPalletID(); //blockar nu allt i databasen, men ville bara se att det funkade
 			int palletStartTime = Integer.parseInt(date1);
 			int date = Integer.parseInt(db.getCookieDateProduced(cookieName));
 			int palletEndTime = Integer.parseInt(date2);
