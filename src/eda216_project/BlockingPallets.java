@@ -2,6 +2,7 @@ package eda216_project;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JButton;
@@ -89,17 +90,18 @@ public class BlockingPallets extends BasicPane {
 			String cookieName = fields[COOKIE_NAME].getText();
 			String date1 = fields[PALLET_START_TIME].getText();
 			String date2 = fields[PALLET_END_TIME].getText();
-			//Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
-			Set<String> pallets= db.getPalletID(); //blockar nu allt i databasen, men ville bara se att det funkade
+			Set<String> pID = new HashSet<String>();
+			Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
 			int palletStartTime = Integer.parseInt(date1);
-			int date = Integer.parseInt(db.getCookieDateProduced(cookieName));
 			int palletEndTime = Integer.parseInt(date2);
 			if (db.getCookieName().contains(cookieName)) {
+				int date = Integer.parseInt(db.getCookieDateProduced(cookieName));
 				if (date >= palletStartTime && date <= palletEndTime) {
 					for(String p : pallets){
 						db.blockPallet(p);
-						messageLabel.setText("Pallet with ID " + p + " is blocked");
+						pID.add(p);
 					}
+					messageLabel.setText("Pallet with ID " + pID + " is blocked");
 				} else {
 					messageLabel.setText(
 							"There was no pallets produced within this time span with the product: " + cookieName);
