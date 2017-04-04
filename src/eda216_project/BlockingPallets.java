@@ -92,11 +92,9 @@ public class BlockingPallets extends BasicPane {
 			String date2 = fields[PALLET_END_TIME].getText();
 			Set<String> pID = new HashSet<String>();
 			Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
-			int palletStartTime = Integer.parseInt(date1);
-			int palletEndTime = Integer.parseInt(date2);
 			if (db.getCookieName().contains(cookieName)) {
-				int date = Integer.parseInt(db.getCookieDateProduced(cookieName));
-				if (date >= palletStartTime && date <= palletEndTime) {
+				String date = db.getCookieDateProduced(cookieName);
+				if (date.compareTo(date1) >= 0 && date.compareTo(date2) <=0) {
 					for(String p : pallets){
 						db.blockPallet(p);
 						pID.add(p);
