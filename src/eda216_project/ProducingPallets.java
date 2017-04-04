@@ -10,6 +10,8 @@ import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ProducingPallets extends BasicPane {
@@ -19,6 +21,8 @@ public class ProducingPallets extends BasicPane {
 	 * The text field where the user id is entered.
 	 */
 	private JTextField[] fields;
+	
+	private JTextField field;
 
 	/**
 	 * The number of the field where the cookie is entered.
@@ -51,11 +55,13 @@ public class ProducingPallets extends BasicPane {
 	 * @return The left panel.
 	 */
 	public JComponent createLeftTopPanel() {
-		String[] texts = new String[1];
-		texts[COOKIE_NAME] = "Cookie name";
-		fields = new JTextField[1];
-		fields[COOKIE_NAME] = new JTextField(12);
-		return new InputPanel(texts, fields);
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel();
+		label.setText("Cookie name");
+		field = new JTextField(20);
+		panel.add(label);
+		panel.add(field);
+		return panel;
 	}
 
 	/**
@@ -103,28 +109,26 @@ public class ProducingPallets extends BasicPane {
 		 *            The event object (not used).
 		 */
 		public void actionPerformed(ActionEvent e) {
-			LocalDate now = LocalDate.now();
-			LocalTime nowT = LocalTime.now();
-			String cookieName = fields[COOKIE_NAME].getText();
-			String date = now.toString();
-			String time = nowT.toString();
-			Optional<Integer> produce = db.producePallet(cookieName);
-			Set<String> ingredients = db.getIngredients(cookieName);
+			String cookieName = field.getText();
 			Set<String> amount = db.getAmountInStorage();
 			if (db.getCookieName().contains(cookieName)) {
+				Optional<Integer> produce = db.producePallet(cookieName);
+				Set<String> ingredients = db.getIngredients(cookieName);
 				if (produce.isPresent()) {
 					String palletID = Integer.toString(produce.get());
 					for (String ingredient : ingredients) {
-						db.updateIngrediens(db.getIngredientAmount(ingredient), ingredient);
-						fields[DATE_TIME].setText(date + " " + time);
-						fields[PALLET_ID].setText(palletID);
+						// db.updateIngrediens(db.getIngredientAmount(ingredient),
+						// ingredient);
 					}
+					fields[COOKIE_NAME].setText(cookieName);
+					fields[DATE_TIME].setText(db.getPalletDateProduced(palletID));
+					fields[PALLET_ID].setText(palletID);
 					for (String a : amount) {
-						System.out.println(a);
+						//System.out.println(a);
 					}
-				} else {
-					messageLabel.setText("There are no cookies with that name");
 				}
+			} else {
+				messageLabel.setText("There are no cookies with that name");
 			}
 		}
 	}
