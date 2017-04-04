@@ -81,17 +81,16 @@ public class Database {
 		return getSet(sql);
 	}
 
-	// kommer krångla
 	public Set<String> getCookieDatePallets(String cookie, String date1, String date2) {
-		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + "\" AND dateProduced <= "
-				+ date2 + "\" AND cookie = " + cookie + "\";";
+		String sql = "SELECT palletID " + "FROM Pallets " + "WHERE cookie=\"" + cookie + "\" AND dateProduced >=\""
+				+ date1 + "\" AND dateProduced <=\"" + date2 + "\";";
+
 		return getSet(sql);
 	}
 
-	// krånglar
 	public Set<String> getDatePallets(String date1, String date2) {
-		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + "\" AND dateProduced <= "
-				+ date2 + "\";";
+		String sql = "SELECT palletID " + "FROM Pallets " + "WHERE dateProduced >=\"" + date1
+				+ "\" AND dateProduced <=\"" + date2 + "\";";
 		return getSet(sql);
 	}
 
@@ -169,8 +168,8 @@ public class Database {
 	}
 
 	public void updateIngrediens(String amount, String ingredient) {
-		String sql = "UPDATE Ingrediens SET amountStorage = amountStorage \"" + -Integer.parseInt(amount) + "WHERE ingredient =\""
-				+ ingredient + "\";";
+		String sql = "UPDATE Ingrediens SET amountStorage = amountStorage \"" + -Integer.parseInt(amount)
+				+ "WHERE ingredient =\"" + ingredient + "\";";
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
