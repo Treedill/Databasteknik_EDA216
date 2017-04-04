@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
@@ -129,55 +130,7 @@ public class Database {
 				+ " WHERE palletID =\"" + palletID + "\";";
 		return getField(sql);
 	}
-
-	public void blockPallet(String palletID) {
-		String sql = "UPDATE Pallets SET isBlocked = 1 WHERE palletID =\"" + palletID + "\";";
-
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-			// update
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	// kod nåt sånt iaf
-	public Optional<Integer> producePallet(String cookie) {
-		try {
-			conn.setAutoCommit(false);
-			String sql = "INSERT INTO Pallets(cookie) VALUES(\"" + cookie + "\");";
-			String produce = "SELECT last_insert_rowid() AS palletID";
-			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery(produce);
-			if (!rs.next()) {
-				return Optional.empty();
-			} else {
-				if (executeUpdate(sql) != 1) {
-					conn.rollback();
-					return Optional.empty();
-				}
-				return Optional.of(rs.getInt("palletID"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return Optional.empty();
-	}
-
-	public void updateIngrediens(String amount, String ingredient) {
-		String sql = "UPDATE Ingrediens SET amountStorage = amountStorage \"" + -Integer.parseInt(amount)
-				+ "WHERE ingredient =\"" + ingredient + "\";";
-
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-			// update
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
+	
 	public String getIngredientAmount(String ingredient) {
 		String sql = "SELECT amount" + " FROM RecipeItems" + " WHERE ingredient =\"" + ingredient + "\";";
 		return getField(sql);
@@ -202,6 +155,55 @@ public class Database {
 	public String getCookieDateProduced(String cookie) {
 		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
 		return getField(sql);
+	}
+
+	public void blockPallet(String palletID) {
+		String sql = "UPDATE Pallets SET isBlocked = 1 WHERE palletID =\"" + palletID + "\";";
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			// update
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	// kod nåt sånt iaf
+	public Optional<Integer> producePallet(String cookie) {
+		LocalDate date = LocalDate.now();
+		try {
+			conn.setAutoCommit(false);
+			String sql = "INSERT INTO Pallets(cookie, dateProduced, dateDelivered) VALUES(\"" + 
+			cookie + "\",\"" + date + "\",\"" + date + "\");";
+			String produce = "SELECT last_insert_rowid() AS palletID";
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery(produce);
+			if (!rs.next()) {
+				return Optional.empty();
+			} else {
+				if (executeUpdate(sql) != 1) {
+					conn.rollback();
+					return Optional.empty();
+				}
+				return Optional.of(rs.getInt("palletID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Optional.empty();
+	}
+
+	public void updateIngrediens(String amount, String ingredient) {
+		String sql = "UPDATE Ingrediens SET amountStorage = amountStorage \"" + -Integer.parseInt(amount)
+				+ "WHERE ingredient =\"" + ingredient + "\";";
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			// update
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	private Set<String> getSet(String sql) {
