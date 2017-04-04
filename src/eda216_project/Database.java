@@ -138,8 +138,6 @@ public class Database {
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			// set the corresponding param
-			//pstmt.setString(1, palletID);
 			// update
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -170,8 +168,27 @@ public class Database {
 		return Optional.empty();
 	}
 
-	public Optional<Integer> updateIngrediens() {
-		return Optional.empty();
+	public void updateIngrediens(String amount, String ingredient) {
+		String sql = "UPDATE Ingrediens SET amountStorage = amountStorage \"" + -Integer.parseInt(amount) + "WHERE ingredient =\""
+				+ ingredient + "\";";
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			// update
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public String getIngredientAmount(String ingredient) {
+		String sql = "SELECT amount" + " FROM RecipeItems" + " WHERE ingredient =\"" + ingredient + "\";";
+		return getField(sql);
+	}
+
+	public Set<String> getIngredients(String cookie) {
+		String sql = "SELECT ingredient" + " FROM RecipeItems" + " WHERE cookie =\"" + cookie + "\";";
+		return getSet(sql);
 	}
 
 	// ger random nummer
