@@ -2,7 +2,9 @@ package eda216_project;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -101,9 +103,11 @@ public class ProducingPallets extends BasicPane {
 		 *            The event object (not used).
 		 */
 		public void actionPerformed(ActionEvent e) {
-			LocalDateTime now = LocalDateTime.now();
+			LocalDate now = LocalDate.now();
+			LocalTime nowT = LocalTime.now();
 			String cookieName = fields[COOKIE_NAME].getText();
-			String dateAndTime = now.toString();
+			String date = now.toString();
+			String time = nowT.toString();
 			Optional<Integer> produce = db.producePallet(cookieName);
 			Set<String> ingredients = db.getIngredients(cookieName);
 			if (db.getCookieName().contains(cookieName)) {
@@ -112,7 +116,7 @@ public class ProducingPallets extends BasicPane {
 					for(String ingredient : ingredients){
 						db.updateIngrediens(db.getIngredientAmount(ingredient), ingredient);
 					}
-					fields[DATE_TIME].setText(dateAndTime);
+					fields[DATE_TIME].setText(date + " " + time);
 					fields[PALLET_ID].setText(palletID);
 				}
 			} else {
