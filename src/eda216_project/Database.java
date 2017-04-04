@@ -100,14 +100,14 @@ public class Database {
 	}
 
 	public Set<String> getCustomers() {
-		String sql = "SELECT customer" + " FROM Customers";
+		String sql = "SELECT customerName" + " FROM Customers";
 		return getSet(sql);
 	}
 
 	// måste göra joins med både Orders och Pallets
 	public Set<String> getCustomerPallets(String customer) {
-		String sql = "SELECT palletID" + " FROM Pallets";
-		// Where customer = customer
+		String sql = "SELECT palletID" + " FROM Pallets NATURAL JOIN Orders NATURAL JOIN Customers "
+				+ " WHERE customerName =\"" + customer + "\";";
 		return getSet(sql);
 	}
 
@@ -127,9 +127,9 @@ public class Database {
 
 	// Måste göra joins med Pallets och Orders
 	public String getCustomer(String palletID) {
-		// String sql = "SELECT ";
-		// return getField(sql);
-		return null;
+		String sql = "SELECT customerName FROM Customers NATURAL JOIN Orders NATURAL JOIN Pallets"
+				+ " WHERE palletID =\"" + palletID + "\";";
+		return getField(sql);
 	}
 
 	public void blockPallet(String palletID) {
