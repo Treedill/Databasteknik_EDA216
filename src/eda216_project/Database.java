@@ -2,6 +2,7 @@ package eda216_project;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -79,17 +80,18 @@ public class Database {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE cookie =\"" + cookie + "\";";
 		return getSet(sql);
 	}
-	
-	//kommer krångla
-	public Set<String> getCookieDatePallets(String cookie, String date1, String date2){
-		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + 
-		"\" AND dateProduced <= " + date2 + "\" AND cookie = " + cookie + "\";";
+
+	// kommer krångla
+	public Set<String> getCookieDatePallets(String cookie, String date1, String date2) {
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + "\" AND dateProduced <= "
+				+ date2 + "\" AND cookie = " + cookie + "\";";
 		return getSet(sql);
 	}
-	//krånglar
+
+	// krånglar
 	public Set<String> getDatePallets(String date1, String date2) {
-		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + 
-		"\" AND dateProduced <= " + date2 + "\";";
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE dateProduced >=" + date1 + "\" AND dateProduced <= "
+				+ date2 + "\";";
 		return getSet(sql);
 	}
 
@@ -97,19 +99,19 @@ public class Database {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE isBlocked = 1";
 		return getSet(sql);
 	}
-	
-	public Set<String> getCustomers(){
+
+	public Set<String> getCustomers() {
 		String sql = "SELECT customer" + " FROM Customers";
 		return getSet(sql);
 	}
-	
-	//måste göra joins med både Orders och Pallets
+
+	// måste göra joins med både Orders och Pallets
 	public Set<String> getCustomerPallets(String customer) {
 		String sql = "SELECT palletID" + " FROM Pallets";
-		//Where customer = customer
+		// Where customer = customer
 		return getSet(sql);
 	}
-	
+
 	public String isBlocked(String palletID) {
 		String sql = "SELECT isBlocked " + " FROM Pallets " + " WHERE palletID =\"" + palletID + "\";";
 		if (getField(sql).contains("1")) {
@@ -118,25 +120,34 @@ public class Database {
 			return "Not Blocked";
 		}
 	}
-	
+
 	public String getCookie(String palletID) {
 		String sql = "SELECT cookie" + " FROM Pallets" + " WHERE palletID =\"" + palletID + "\";";
 		return getField(sql);
 	}
-	
-	//Måste göra joins med Pallets och Orders
-	public String getCustomer(String palletID){
-//		String sql = "SELECT ";
-//		return getField(sql);
+
+	// Måste göra joins med Pallets och Orders
+	public String getCustomer(String palletID) {
+		// String sql = "SELECT ";
+		// return getField(sql);
 		return null;
 	}
-	
-	//kod
-	public Optional<Integer> blockPallet(String palletID) {
-		return Optional.empty();
+
+	public void blockPallet(String palletID) {
+		String sql = "UPDATE Pallets SET isBlocked = 1 WHERE palletID =\"" + palletID + "\";";
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			// set the corresponding param
+			//pstmt.setString(1, palletID);
+			// update
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
-	
-	//kod nåt sånt iaf
+
+	// kod nåt sånt iaf
 	public Optional<Integer> producePallet(String cookie) {
 		try {
 			conn.setAutoCommit(false);
@@ -147,7 +158,7 @@ public class Database {
 			if (!rs.next()) {
 				return Optional.empty();
 			} else {
-				if(executeUpdate(sql) != 1){
+				if (executeUpdate(sql) != 1) {
 					conn.rollback();
 					return Optional.empty();
 				}
@@ -158,17 +169,17 @@ public class Database {
 		}
 		return Optional.empty();
 	}
-	
-	public Optional<Integer> updateIngrediens(){
+
+	public Optional<Integer> updateIngrediens() {
 		return Optional.empty();
 	}
-	
-	//ger random nummer
+
+	// ger random nummer
 	public String getPalletDateProduced(String palletID) {
 		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE palletID=\"" + palletID + "\";";
 		return getField(sql);
 	}
-	
+
 	public String getCookieDateProduced(String cookie) {
 		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
 		return getField(sql);
