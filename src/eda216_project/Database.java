@@ -136,8 +136,26 @@ public class Database {
 		return Optional.empty();
 	}
 	
-	//kod
-	public Optional<Integer> producePallet() {
+	//kod nåt sånt iaf
+	public Optional<Integer> producePallet(String cookie) {
+		try {
+			conn.setAutoCommit(false);
+			String sql = "INSERT INTO Pallets(cookie) VALUES(\"" + cookie + "\");";
+			String produce = "SELECT last_insert_rowid() AS palletID";
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery(produce);
+			if (!rs.next()) {
+				return Optional.empty();
+			} else {
+				if(executeUpdate(sql) != 1){
+					conn.rollback();
+					return Optional.empty();
+				}
+				return Optional.of(rs.getInt("palletID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return Optional.empty();
 	}
 	
