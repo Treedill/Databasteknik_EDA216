@@ -3,6 +3,8 @@ package eda216_project;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -102,12 +104,18 @@ public class ProducingPallets extends BasicPane {
 			LocalDateTime now = LocalDateTime.now();
 			String cookieName = fields[COOKIE_NAME].getText();
 			String dateAndTime = now.toString();
-			String palletID = "1";
+			Optional<Integer> produce = db.producePallet(cookieName);
+			Set<String> ingredients = db.getIngredients(cookieName);
 			if (db.getCookieName().contains(cookieName)) {
-				db.producePallet();
-				fields[DATE_TIME].setText(dateAndTime);
-				fields[PALLET_ID].setText(palletID);
-			}else{
+				if (produce.isPresent()) {
+					String palletID = Integer.toString(produce.get());
+					for(String ingredient : ingredients){
+						db.updateIngrediens(db.getIngredientAmount(ingredient), ingredient);
+					}
+					fields[DATE_TIME].setText(dateAndTime);
+					fields[PALLET_ID].setText(palletID);
+				}
+			} else {
 				messageLabel.setText("There are no cookies with that name");
 			}
 		}
