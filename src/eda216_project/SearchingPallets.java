@@ -249,9 +249,11 @@ public class SearchingPallets extends BasicPane {
 				return;
 			}
 			String palletID = infoList.getSelectedValue();
-			String customer = db.getCustomer(palletID);			//vet inte om den funkar
+			String customer = db.getCustomer(palletID); // vet inte om den
+														// funkar
 			String blocked = db.isBlocked(palletID);
-			String date = db.getPalletDateProduced(palletID); 			//ger nr 2008 och 2005??
+			String date = db.getPalletDateProduced(palletID); // ger nr 2008 och
+																// 2005??
 			String cookie = db.getCookie(palletID);
 			fields[CUSTOMER].setText(customer);
 			fields[PALLET_ID].setText(palletID);
@@ -289,10 +291,10 @@ public class SearchingPallets extends BasicPane {
 		 */
 		public void actionPerformed(ActionEvent e) {
 			String input = field1.getText();
-			String dateLast = field2.getText();
+			String dateFirst = field2.getText();
 			switch (searching) {
 			case 1:
-				fillInfoListDate(input, dateLast);
+				fillInfoListDate(dateFirst, input);
 				if (infoList.getModel().getSize() == 0) {
 					messageLabel.setText("There are no pallets produced within that date");
 				}
