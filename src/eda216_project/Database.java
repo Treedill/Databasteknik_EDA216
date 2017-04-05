@@ -208,7 +208,8 @@ public class Database {
 	}
 
 	public void updateIngredients(String amount, String ingredient) {
-		String sql = "UPDATE Ingredients SET amountStorage = amountStorage -10 WHERE ingredient =\"" + ingredient + "\";";
+		String sql = "UPDATE Ingredients SET amountStorage = amountStorage -" + amount + " WHERE ingredient =\""
+				+ ingredient + "\";";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// update
 			pstmt.executeUpdate();
