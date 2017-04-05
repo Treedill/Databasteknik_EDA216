@@ -31,7 +31,7 @@ FOREIGN KEY (customerName) references Customers(customerName)
 );
 
 CREATE TABLE Pallets(
-palletID int,
+palletID integer,
 dateProduced datetime NOT NULL,
 isBlocked int,
 dateDelivered date,
@@ -127,36 +127,25 @@ INSERT INTO Ingredients (ingredient) VALUES('Cinnamon');
 INSERT INTO Ingredients (ingredient) VALUES('Vanilla sugar');
 
 /*
-Ska tas bort sen
-*/
-INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
-VALUES (1, 2016-03-08, 1, 2016-03-08, 'Nut ring');
-INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
-VALUES (2, 2016-03-08, 0, 2016-03-08, 'Nut ring');
-INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
-VALUES (3, 2019-03-08, 1, 2019-03-08, 'Berliner');
-INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
-VALUES (4, 2019-03-08, 0, 2016-03-09, 'Tango');
-INSERT INTO Pallets (palletID, dateProduced, isBLocked, dateDelivered, cookie)
-VALUES (5, 2016-03-08, 0, 2016-03-08, 'Nut cookie');
-
-/*
 Dessa måste väl finnas för att kunna få upp customer?
 */
+INSERT INTO Orders (orderNbr, customerName, placedDate, deliveryDate)
+VALUES (1, 'Finkakor AB', 2016-03-10, 2016-05-10);
+INSERT INTO Orders (orderNbr, customerName, placedDate, deliveryDate)
+VALUES (2, 'Finkakor AB', 2016-03-10, 2016-05-10);
+INSERT INTO Orders (orderNbr, customerName, placedDate, deliveryDate)
+VALUES (3, 'Småbröd AB', 2016-03-19, 2016-05-10);
 
-INSERT INTO OrderItems (cookieName, nbrPallets, orderNbr)
+INSERT INTO OrderItems (cookie, nbrPallets, orderNbr)
 VALUES ('Nut ring', 2, 1);
-INSERT INTO OrderItems (cookieName, nbrPallets, orderNbr)
+INSERT INTO OrderItems (cookie, nbrPallets, orderNbr)
 VALUES ('Nut cookie', 1, 2);
-INSERT INTO OrderItems (cookieName, nbrPallets, orderNbr)
+INSERT INTO OrderItems (cookie, nbrPallets, orderNbr)
 VALUES ('Tango', 1, 3);
+INSERT INTO Pallets (palletID, dateProduced, isBLocked, cookie, orderNbr)
+VALUES (1, 2016-03-08, 0,  'Berliner', 1);
 
-INSERT INTO Orders (orderNbr, customerName, placedDate, deliveryDate)
-VALUES (1, 'Finkakor AB', 2016-03-10, 2016-05-10)
-INSERT INTO Orders (orderNbr, customerName, placedDate, deliveryDate)
-VALUES (2, 'Finkakor AB', 2016-03-10, 2016-05-10)
-INSERT INTO Orders (orderNbr, customerName, placedDate, deliveryDate)
-VALUES (3, 'Småbröd AB', 2016-03-19, 2016-05-10)
+
 
 /*
 Känns som detta inte är BCNF dock asså...
@@ -198,5 +187,3 @@ INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Icing sugar','Berli
 INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Eggs','Berliner', 50);
 INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Vanilla sugar','Berliner', 5);
 INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Chocolate','Berliner', 50);
-
-
