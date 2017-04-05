@@ -21,7 +21,7 @@ public class ProducingPallets extends BasicPane {
 	 * The text field where the user id is entered.
 	 */
 	private JTextField[] fields;
-	
+
 	private JTextField field;
 
 	/**
@@ -110,23 +110,18 @@ public class ProducingPallets extends BasicPane {
 		 */
 		public void actionPerformed(ActionEvent e) {
 			String cookieName = field.getText();
-			Set<String> amount = db.getAmountInStorage();
 			if (db.getCookieName().contains(cookieName)) {
-				Optional<Integer> produce = db.producePallet(cookieName);
+				int produce = db.producePallet(cookieName);
 				Set<String> ingredients = db.getIngredients(cookieName);
-				if (produce.isPresent()) {
-					String palletID = Integer.toString(produce.get());
-					for (String ingredient : ingredients) {
-						// db.updateIngrediens(db.getIngredientAmount(ingredient),
-						// ingredient);
-					}
-					fields[COOKIE_NAME].setText(cookieName);
-					fields[DATE_TIME].setText(db.getPalletDateProduced(palletID));
-					fields[PALLET_ID].setText(palletID);
-					for (String a : amount) {
-						//System.out.println(a);
-					}
+				for (String ingredient : ingredients) {
+					db.updateIngredients(db.getIngredientAmount(ingredient), ingredient);
 				}
+				String palletID = Integer.toString(produce);
+				fields[COOKIE_NAME].setText(cookieName);
+				fields[DATE_TIME].setText(db.getPalletDateProduced(palletID));
+				fields[PALLET_ID].setText(palletID);
+				db.getAmountInStorage();
+
 			} else {
 				messageLabel.setText("There are no cookies with that name");
 			}
