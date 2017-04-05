@@ -51,6 +51,8 @@ Vi skulle inte implementera leverans.
 ## Outline
 Vi har använt oss av SQLite för vår databas, och en javaapplication som kommunicerar med vår databas genom JDBC. 
 ## ER-diagram
+Se på följande länk
+https://github.com/Treedill/Databasteknik_EDA216/blob/master/ER%20diagram.png?raw=true
 
 ## Relationer
 
