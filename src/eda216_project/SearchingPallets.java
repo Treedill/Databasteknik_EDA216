@@ -102,7 +102,7 @@ public class SearchingPallets extends BasicPane {
 		field2 = new JTextField();
 		field1.setVisible(false);
 		field2.setVisible(false);
-		field2.setText("2003");
+		field2.setText("2016-03-07");
 		p.setLayout(new GridLayout(2, 1));
 		p.add(new JLabel("Search by:"));
 		p.add(p1);
@@ -138,12 +138,13 @@ public class SearchingPallets extends BasicPane {
 				return;
 			}
 			String choice = nameList.getSelectedValue();
+			infoList.clearSelection();
 			field2.setVisible(false);
 			field1.setVisible(true);
 			messageLabel.setText(" ");
 			if (choice == "Time span") {
 				field2.setVisible(true);
-				field1.setText("2009");
+				field1.setText("2017-05-09");
 				searching = 1;
 			} else if (choice == "Pallet ID") {
 				field1.setText("1");
@@ -250,11 +251,9 @@ public class SearchingPallets extends BasicPane {
 				return;
 			}
 			String palletID = infoList.getSelectedValue();
-			String customer = db.getCustomer(palletID); // vet inte om den
-														// funkar
+			String customer = db.getCustomer(palletID);
 			String blocked = db.isBlocked(palletID);
-			String date = db.getPalletDateProduced(palletID); // ger nr 2008 och
-																// 2005??
+			String date = db.getPalletDateProduced(palletID); 
 			String cookie = db.getCookie(palletID);
 			fields[CUSTOMER].setText(customer);
 			fields[PALLET_ID].setText(palletID);
