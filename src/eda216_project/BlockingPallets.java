@@ -93,16 +93,18 @@ public class BlockingPallets extends BasicPane {
 			Set<String> pID = new HashSet<String>();
 			Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
 			if (db.getCookieName().contains(cookieName)) {
-				String date = db.getCookieDateProduced(cookieName);
-				if (date.compareTo(date1) >= 0 && date.compareTo(date2) <=0) {
-					for(String p : pallets){
-						db.blockPallet(p);
-						pID.add(p);
+				Set<String> dates = db.getCookieDateProduced(cookieName);
+				for (String date : dates) {
+					if (date.compareTo(date1) >= 0 && date.compareTo(date2) <= 0) {
+						for (String p : pallets) {
+							db.blockPallet(p);
+							pID.add(p);
+						}
+						messageLabel.setText("Pallet with ID " + pID + " is blocked");
+					} else {
+						messageLabel.setText(
+								"There was no pallets produced within this time span with the product: " + cookieName);
 					}
-					messageLabel.setText("Pallet with ID " + pID + " is blocked");
-				} else {
-					messageLabel.setText(
-							"There was no pallets produced within this time span with the product: " + cookieName);
 				}
 			} else {
 				messageLabel.setText("There are no cookies with that name");
