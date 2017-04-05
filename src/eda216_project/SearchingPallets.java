@@ -138,7 +138,7 @@ public class SearchingPallets extends BasicPane {
 				return;
 			}
 			String choice = nameList.getSelectedValue();
-			infoList.clearSelection();
+			infoListModel.removeAllElements();
 			field2.setVisible(false);
 			field1.setVisible(true);
 			messageLabel.setText(" ");
