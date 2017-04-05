@@ -137,13 +137,16 @@ INSERT INTO Orders (orderNbr, customerName, placedDate, deliveryDate)
 VALUES (3, 'Småbröd AB', 2016-03-19, 2016-05-10);
 
 INSERT INTO OrderItems (cookie, nbrPallets, orderNbr)
-VALUES ('Nut ring', 2, 1);
+VALUES ('Nut ring', 1, 1);
 INSERT INTO OrderItems (cookie, nbrPallets, orderNbr)
 VALUES ('Nut cookie', 1, 2);
 INSERT INTO OrderItems (cookie, nbrPallets, orderNbr)
 VALUES ('Tango', 1, 3);
+
 INSERT INTO Pallets (palletID, dateProduced, isBLocked, cookie, orderNbr)
-VALUES (1, date('now'), 0,  'Berliner', 1);
+VALUES (1, datetime('now'), 0,  'Nut ring', 1);
+INSERT INTO Pallets (palletID, dateProduced, isBLocked, cookie, orderNbr)
+VALUES (2, datetime('now'), 0,  'Tango', 3);
 
 
 
