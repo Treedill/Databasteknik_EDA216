@@ -143,7 +143,7 @@ VALUES ('Nut cookie', 1, 2);
 INSERT INTO OrderItems (cookie, nbrPallets, orderNbr)
 VALUES ('Tango', 1, 3);
 INSERT INTO Pallets (palletID, dateProduced, isBLocked, cookie, orderNbr)
-VALUES (1, 2016-03-08, 0,  'Berliner', 1);
+VALUES (1, date('now'), 0,  'Berliner', 1);
 
 
 
