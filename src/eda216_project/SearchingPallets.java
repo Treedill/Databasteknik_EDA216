@@ -102,7 +102,7 @@ public class SearchingPallets extends BasicPane {
 		field2 = new JTextField();
 		field1.setVisible(false);
 		field2.setVisible(false);
-		field2.setText("2016-03-07");
+		field2.setText("2016-03-07 00:00:00");
 		p.setLayout(new GridLayout(2, 1));
 		p.add(new JLabel("Search by:"));
 		p.add(p1);
@@ -144,7 +144,7 @@ public class SearchingPallets extends BasicPane {
 			messageLabel.setText(" ");
 			if (choice == "Time span") {
 				field2.setVisible(true);
-				field1.setText("2017-05-09");
+				field1.setText("2017-05-09 10:39:50");
 				searching = 1;
 			} else if (choice == "Pallet ID") {
 				field1.setText("1");
@@ -177,8 +177,6 @@ public class SearchingPallets extends BasicPane {
 		infoList.addListSelectionListener(new InfoSelectionListener());
 		JScrollPane p1 = new JScrollPane(infoList);
 
-		// fillInfoList();
-
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 2));
 		panel.add(p1);
@@ -190,7 +188,7 @@ public class SearchingPallets extends BasicPane {
 		texts[CUSTOMER] = "Customer";
 		fields = new JTextField[NBR_FIELDS];
 		for (int i = 0; i < fields.length; i++) {
-			fields[i] = new JTextField(10);
+			fields[i] = new JTextField(13);
 			fields[i].setEditable(false);
 		}
 		panel.add(new InputPanel(texts, fields));
