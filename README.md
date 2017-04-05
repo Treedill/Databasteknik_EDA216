@@ -54,23 +54,21 @@ Vi har använt oss av SQLite för vår databas, och en javaapplication som kommu
 
 ## Relationer
 
-customers(**ssn**, customerName, address)
+customer(**customerName**, address)
 
-orders(**orderNbr**, placedDate, deliveryDate, *ssn*)
+orders(**orderNbr**, placedDate, deliveryDate, *customerName*)
 
-pallets(**palletID**, dateProduced, isBlocked, dateDelivered, *cookieID*, *orderNbr*)
+pallets(**palletID**, dateProduced, isBlocked, dateDelivered, *cookie*, *orderNbr*)
 
-products(**cookieID**, cookie)
+products(**cookie**)
 
-ingredients(**ingredientID**,ingredient, amountStorage, deliveryDate, deliveryAmount)
+ingredients(**ingredient**, amountStorage, deliveryDate, deliveryAmount)
 
-recipeItems(amount, **_ingredientID_, _cookieID_**)
+recipeItems(amount, **_ingredient_, _cookie_**)
 
-orderItems(nbrPallets, **_orderNbr_, _cookieID_**)
+orderItems(nbrPallets, **_orderNbr_, _cookie_**)
 
 Det finns inga funktionella beroenden förutom nyckelberoendena. Därför är relationerna i BCNF.
-
-Detta kanske kommer ändras...
 
 
 ## SQL statements
