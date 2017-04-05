@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
@@ -77,17 +78,6 @@ public class Database {
 		String sql = "SELECT palletID " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
 		return getField(sql);
 	}
-
-	public Set<String> getCookieName() {
-		String sql = "SELECT cookie" + " FROM Products";
-		return getSet(sql);
-	}
-
-	public Set<String> getCookiePallets(String cookie) {
-		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE cookie =\"" + cookie + "\";";
-		return getSet(sql);
-	}
-
 	public Set<String> getCookieDatePallets(String cookie, String date1, String date2) {
 		String sql = "SELECT palletID " + "FROM Pallets " + "WHERE cookie=\"" + cookie + "\" AND dateProduced >=\""
 				+ date1 + "\" AND dateProduced <=\"" + date2 + "\";";
@@ -101,23 +91,23 @@ public class Database {
 		return getSet(sql);
 	}
 
+	public Set<String> getCookiePallets(String cookie) {
+		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE cookie =\"" + cookie + "\";";
+		return getSet(sql);
+	}
+
+
 	public Set<String> getBlockedPallets() {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE isBlocked = 1";
 		return getSet(sql);
 	}
-
-	public Set<String> getCustomers() {
-		String sql = "SELECT customerName" + " FROM Customers";
-		return getSet(sql);
-	}
-
 	public Set<String> getCustomerPallets(String customer) {
 		String sql = "SELECT palletID"
 				+ " FROM Pallets NATURAL JOIN OrderItems NATURAL JOIN Orders NATURAL JOIN Customers "
 				+ " WHERE customerName =\"" + customer + "\";";
 		return getSet(sql);
 	}
-
+	
 	public String isBlocked(String palletID) {
 		String sql = "SELECT isBlocked " + " FROM Pallets " + " WHERE palletID =\"" + palletID + "\";";
 		if (getField(sql).contains("1")) {
@@ -126,16 +116,37 @@ public class Database {
 			return "Not Blocked";
 		}
 	}
-
+	
+	public Set<String> getCookieName() {
+		String sql = "SELECT cookie" + " FROM Products";
+		return getSet(sql);
+	}
+	
 	public String getCookie(String palletID) {
 		String sql = "SELECT cookie" + " FROM Pallets" + " WHERE palletID =\"" + palletID + "\";";
 		return getField(sql);
 	}
+	
+	public Set<String> getCustomers() {
+		String sql = "SELECT customerName" + " FROM Customers";
+		return getSet(sql);
+	}
 
+	
 	public String getCustomer(String palletID) {
 		String sql = "SELECT customerName FROM Customers NATURAL JOIN Orders NATURAL JOIN Pallets"
 				+ " WHERE palletID =\"" + palletID + "\";";
 		return getField(sql);
+	}
+	
+	public String getPalletDateProduced(String palletID) {
+		String sql = "SELECT dateProduced " + " FROM Pallets " + " WHERE palletID=\"" + palletID + "\";";
+		return getField(sql);
+	}
+
+	public Set<String> getCookieDateProduced(String cookie) {
+		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
+		return getSet(sql);
 	}
 
 	public String getIngredientAmount(String ingredient) {
@@ -147,7 +158,7 @@ public class Database {
 		String sql = "SELECT ingredient" + " FROM RecipeItems" + " WHERE cookie =\"" + cookie + "\";";
 		return getSet(sql);
 	}
-
+	
 	public void getAmountInStorage() {
 		try {
 			Statement stmt = conn.createStatement();
@@ -161,16 +172,6 @@ public class Database {
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-	}
-
-	public String getPalletDateProduced(String palletID) {
-		String sql = "SELECT dateProduced " + " FROM Pallets " + " WHERE palletID=\"" + palletID + "\";";
-		return getField(sql);
-	}
-
-	public Set<String> getCookieDateProduced(String cookie) {
-		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
-		return getSet(sql);
 	}
 
 	public void blockPallet(String palletID) {
@@ -187,12 +188,15 @@ public class Database {
 
 	// kod nåt sånt iaf
 	public int producePallet(String cookie) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		LocalTime time = LocalTime.now();
+		String f = formatter.format(time);
 		LocalDate date = LocalDate.now();
 		try {
 			conn.setAutoCommit(true);
 			Statement s = conn.createStatement();
 			String sql = "INSERT INTO Pallets(cookie, dateProduced, isBlocked) VALUES(\"" + cookie + "\",\"" + date
-					+ "\",\"" + 0 + "\");";
+					+ " " + f + "\",\"" + 0 + "\");";
 			String produce = "SELECT last_insert_rowid() AS pallID";
 			s.executeUpdate(sql);
 			ResultSet rs = s.executeQuery(produce);
@@ -211,7 +215,6 @@ public class Database {
 		String sql = "UPDATE Ingredients SET amountStorage = amountStorage -" + amount + " WHERE ingredient =\""
 				+ ingredient + "\";";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			// update
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
