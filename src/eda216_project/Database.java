@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
@@ -72,6 +73,11 @@ public class Database {
 		return getSet(sql);
 	}
 
+	public String getPalletID(String cookie) {
+		String sql = "SELECT palletID " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
+		return getField(sql);
+	}
+
 	public Set<String> getCookieName() {
 		String sql = "SELECT cookie" + " FROM Products";
 		return getSet(sql);
@@ -106,7 +112,8 @@ public class Database {
 	}
 
 	public Set<String> getCustomerPallets(String customer) {
-		String sql = "SELECT palletID" + " FROM Pallets NATURAL JOIN Orders NATURAL JOIN Customers "
+		String sql = "SELECT palletID"
+				+ " FROM Pallets NATURAL JOIN OrderItems NATURAL JOIN Orders NATURAL JOIN Customers "
 				+ " WHERE customerName =\"" + customer + "\";";
 		return getSet(sql);
 	}
@@ -130,7 +137,7 @@ public class Database {
 				+ " WHERE palletID =\"" + palletID + "\";";
 		return getField(sql);
 	}
-	
+
 	public String getIngredientAmount(String ingredient) {
 		String sql = "SELECT amount" + " FROM RecipeItems" + " WHERE ingredient =\"" + ingredient + "\";";
 		return getField(sql);
@@ -141,20 +148,29 @@ public class Database {
 		return getSet(sql);
 	}
 
-	public Set<String> getAmountInStorage(){
-		String sql = "SELECT ingredient, amountStorage FROM Ingredients";
-		return getSet(sql);
+	public void getAmountInStorage() {
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT ingredient, amountStorage FROM Ingredients");
+			while (rs.next()) {
+				String ing = rs.getString("ingredient");
+				String amt = rs.getString("amountStorage");
+				System.out.println("Ingredient: " + ing + "\n Amount: " + amt);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
-	
-	// ger random nummer
+
 	public String getPalletDateProduced(String palletID) {
-		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE palletID=\"" + palletID + "\";";
+		String sql = "SELECT dateProduced " + " FROM Pallets " + " WHERE palletID=\"" + palletID + "\";";
 		return getField(sql);
 	}
 
-	public String getCookieDateProduced(String cookie) {
+	public Set<String> getCookieDateProduced(String cookie) {
 		String sql = "SELECT dateProduced " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
-		return getField(sql);
+		return getSet(sql);
 	}
 
 	public void blockPallet(String palletID) {
@@ -170,34 +186,29 @@ public class Database {
 	}
 
 	// kod nåt sånt iaf
-	public Optional<Integer> producePallet(String cookie) {
+	public int producePallet(String cookie) {
 		LocalDate date = LocalDate.now();
 		try {
-			conn.setAutoCommit(false);
-			String sql = "INSERT INTO Pallets(cookie, dateProduced, dateDelivered) VALUES(\"" + 
-			cookie + "\",\"" + date + "\",\"" + date + "\");";
-			String produce = "SELECT last_insert_rowid() AS palletID";
+			conn.setAutoCommit(true);
 			Statement s = conn.createStatement();
+			String sql = "INSERT INTO Pallets(cookie, dateProduced, isBlocked) VALUES(\"" + cookie + "\",\"" + date
+					+ "\",\"" + 0 + "\");";
+			String produce = "SELECT last_insert_rowid() AS pallID";
+			s.executeUpdate(sql);
 			ResultSet rs = s.executeQuery(produce);
 			if (!rs.next()) {
-				return Optional.empty();
+				return 0;
 			} else {
-				if (executeUpdate(sql) != 1) {
-					conn.rollback();
-					return Optional.empty();
-				}
-				return Optional.of(rs.getInt("palletID"));
+				return rs.getInt("pallID");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return Optional.empty();
+		return 0;
 	}
 
-	public void updateIngrediens(String amount, String ingredient) {
-		String sql = "UPDATE Ingrediens SET amountStorage = amountStorage \"" + -Integer.parseInt(amount)
-				+ "WHERE ingredient =\"" + ingredient + "\";";
-
+	public void updateIngredients(String amount, String ingredient) {
+		String sql = "UPDATE Ingredients SET amountStorage = amountStorage -10 WHERE ingredient =\"" + ingredient + "\";";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// update
 			pstmt.executeUpdate();
