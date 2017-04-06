@@ -25,7 +25,7 @@ Hur mycket som levererats av ingredienser och när senaste leveransen gjordes. D
 Vi skulle inte implementera recept i vårt program, därför uppfyller vi inte det kravet.
 
 #### Producerade pallar
-Blockering av pallar i djupfrys lagring. Sker innan leverans.
+Blockering av pallar i djupfrys lagring. Sker innan leverans, vilket i vårt program betyder att det finns en kund.
 Blockeras i "block pallets". Om en pall redan är levererad så kan den inte blockeras.
 
 Vi kan söka på en pall och få upp information om vad som är på pallen, om pallen är levererad och till vem, och var pallen är. Vi kan också söka på pallar med en viss produkt och pallar producerade under ett visst tidsintervall. Vi kan söka på blockerade pallar.
