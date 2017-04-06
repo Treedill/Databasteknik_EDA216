@@ -114,7 +114,7 @@ public class ProducingPallets extends BasicPane {
 				int produce = db.producePallet(cookieName);
 				Set<String> ingredients = db.getIngredients(cookieName);
 				for (String ingredient : ingredients) {
-					String amnt = db.getIngredientAmount(ingredient);
+					String amnt = db.getIngredientAmount(ingredient, cookieName);
 					db.updateIngredients(amnt, ingredient);
 				}
 				String palletID = Integer.toString(produce);
