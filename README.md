@@ -16,22 +16,22 @@ Detta görs i "produce pallets".
 Vi kan kontrollera hur många pallar som producerats under en viss tid.
 Detta görs i "search pallets".
 #### Råmaterial
-Ingredienserna i lagret uppdateras vid produktion. **Hur mycket som levererats av ingredienser och när senaste leveransen gjordes**.
+Ingredienserna i lagret uppdateras vid produktion. 
 Detta kan ses i konsollen, där amountStorage skrivs ut. Det är 5000 av alla ingredienser från början.
+
+Hur mycket som levererats av ingredienser och när senaste leveransen gjordes. Detta uppfylls inte eftersom vårt program inte har hand om ingredienser på det sättet.
 
 #### Recept
 Vi skulle inte implementera recept i vårt program, därför uppfyller vi inte det kravet.
 
 #### Producerade pallar
-Blockering av pallar i djupfrys lagring. **Sker innan leverans**.
-Blockeras i "block pallets".
+Blockering av pallar i djupfrys lagring. Sker innan leverans.
+Blockeras i "block pallets". Om en pall redan är levererad så kan den inte blockeras.
 
 Vi kan söka på en pall och få upp information om vad som är på pallen, om pallen är levererad och till vem, och var pallen är. Vi kan också söka på pallar med en viss produkt och pallar producerade under ett visst tidsintervall. Vi kan söka på blockerade pallar.
 Detta visas i "search pallets".
 
-**Finally, we must be able to check which pallets that have been delivered to a given customer, and the date and time of delivery.**
-
-/////Delivery visas inte, men det andra gör. Vi kan ju lägga till det om vi vill.
+Vi har inte information om en pall levererats eller datum och tid av leveransen eftersom vårt program inte sköter leveranser. Kunden kan dock visas.
 
 #### Beställning och produktplanering
 VI skulle inte implementera beställningar.
