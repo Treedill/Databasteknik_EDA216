@@ -79,7 +79,7 @@ public class BlockingPallets extends BasicPane {
 	 */
 	class ActionHandler implements ActionListener {
 		/**
-		 * Called when the user clicks the login button. Checks with the
+		 * Called when the user clicks the block button. Checks with the
 		 * database if the user exists, and if so notifies the CurrentUser
 		 * object.
 		 * 
@@ -97,8 +97,10 @@ public class BlockingPallets extends BasicPane {
 				for (String date : dates) {
 					if (date.compareTo(date1) >= 0 && date.compareTo(date2) <= 0) {
 						for (String p : pallets) {
-							db.blockPallet(p);
-							pID.add(p);
+							if (!db.getCustomers().contains(db.getCustomer(p))) {
+								db.blockPallet(p);
+								pID.add(p);
+							}
 						}
 						messageLabel.setText("Pallet with ID " + pID + " is blocked");
 					} else {
