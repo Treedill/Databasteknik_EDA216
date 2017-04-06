@@ -11,25 +11,31 @@ Projektet handlar om att göra ett databassystem åt Krusty Kookies Sweden AB. V
 ## Noteringar om vilka krav vi uppfyller/inte uppfyller
 #### Produktion
 En pall får ett unikt ID, produktens namn och datum vid produktion som registreras i databasen.
+
 Detta görs i "produce pallets".
 
 Vi kan kontrollera hur många pallar som producerats under en viss tid.
+
 Detta görs i "search pallets".
 #### Råmaterial
-Ingredienserna i lagret uppdateras vid produktion. **Hur mycket som levererats av ingredienser och när senaste leveransen gjordes**
+Ingredienserna i lagret uppdateras vid produktion. **Hur mycket som levererats av ingredienser och när senaste leveransen gjordes**.
+
 Detta kan ses i konsollen, där amountStorage skrivs ut. Det är 5000 av alla ingredienser från början.
 
 #### Recept
 Vi skulle inte implementera recept i vårt program, därför uppfyller vi inte det kravet.
 
 #### Producerade pallar
-Blockering av pallar i djupfrys lagring. **Sker innan leverans**
+Blockering av pallar i djupfrys lagring. **Sker innan leverans**.
+
 Blockeras i "block pallets".
 
 Vi kan söka på en pall och få upp information om vad som är på pallen, om pallen är levererad och till vem, och var pallen är. Vi kan också söka på pallar med en viss produkt och pallar producerade under ett visst tidsintervall.
+
 Detta visas i "search pallets".
 
 Vi kan söka på blockerade pallar.
+
 Detta visas i "search pallets".
 
 **Finally, we must be able to check which pallets that have been delivered to a given customer, and the date and time of delivery.**
