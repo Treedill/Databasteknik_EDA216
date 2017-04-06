@@ -78,6 +78,7 @@ public class Database {
 		String sql = "SELECT palletID " + " FROM Pallets " + "WHERE cookie=\"" + cookie + "\";";
 		return getField(sql);
 	}
+
 	public Set<String> getCookieDatePallets(String cookie, String date1, String date2) {
 		String sql = "SELECT palletID " + "FROM Pallets " + "WHERE cookie=\"" + cookie + "\" AND dateProduced >=\""
 				+ date1 + "\" AND dateProduced <=\"" + date2 + "\";";
@@ -96,18 +97,18 @@ public class Database {
 		return getSet(sql);
 	}
 
-
 	public Set<String> getBlockedPallets() {
 		String sql = "SELECT palletID" + " FROM Pallets" + " WHERE isBlocked = 1";
 		return getSet(sql);
 	}
+
 	public Set<String> getCustomerPallets(String customer) {
 		String sql = "SELECT palletID"
 				+ " FROM Pallets NATURAL JOIN OrderItems NATURAL JOIN Orders NATURAL JOIN Customers "
 				+ " WHERE customerName =\"" + customer + "\";";
 		return getSet(sql);
 	}
-	
+
 	public String isBlocked(String palletID) {
 		String sql = "SELECT isBlocked " + " FROM Pallets " + " WHERE palletID =\"" + palletID + "\";";
 		if (getField(sql).contains("1")) {
@@ -116,29 +117,28 @@ public class Database {
 			return "Not Blocked";
 		}
 	}
-	
+
 	public Set<String> getCookieName() {
 		String sql = "SELECT cookie" + " FROM Products";
 		return getSet(sql);
 	}
-	
+
 	public String getCookie(String palletID) {
 		String sql = "SELECT cookie" + " FROM Pallets" + " WHERE palletID =\"" + palletID + "\";";
 		return getField(sql);
 	}
-	
+
 	public Set<String> getCustomers() {
 		String sql = "SELECT customerName" + " FROM Customers";
 		return getSet(sql);
 	}
 
-	
 	public String getCustomer(String palletID) {
 		String sql = "SELECT customerName FROM Customers NATURAL JOIN Orders NATURAL JOIN Pallets"
 				+ " WHERE palletID =\"" + palletID + "\";";
 		return getField(sql);
 	}
-	
+
 	public String getPalletDateProduced(String palletID) {
 		String sql = "SELECT dateProduced " + " FROM Pallets " + " WHERE palletID=\"" + palletID + "\";";
 		return getField(sql);
@@ -149,8 +149,9 @@ public class Database {
 		return getSet(sql);
 	}
 
-	public String getIngredientAmount(String ingredient) {
-		String sql = "SELECT amount" + " FROM RecipeItems" + " WHERE ingredient =\"" + ingredient + "\";";
+	public String getIngredientAmount(String ingredient, String cookie) {
+		String sql = "SELECT amount" + " FROM RecipeItems" + " WHERE ingredient =\"" + ingredient + "\" AND cookie =\""
+				+ cookie + "\";";
 		return getField(sql);
 	}
 
@@ -159,6 +160,11 @@ public class Database {
 		return getSet(sql);
 	}
 	
+	public String getAmountInStorage(String ingredient){
+		String sql = "SELECT amountStorage" + " FROM Ingredients" + " WHERE ingredient =\"" + ingredient + "\";";
+		return getField(sql);
+	}
+
 	public void getAmountInStorage() {
 		try {
 			Statement stmt = conn.createStatement();
