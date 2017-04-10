@@ -71,7 +71,7 @@ För att se de skapade tabellerna, titta på createTables.sql.
 För annan SQL kod, se "database" i java.
 
 ## Användarmanual
-Lägg till JDBC i referenced libraries efter nedladdning av projektet.
-I "Produce Pallets" skriver du in namnet på produkten du vill skapa. Produktens namn, ID och produktionsdatum står till höger.
-I "Block Pallets" skriver du in produktens namn och tidsspannet som du vill blocka i nedanstående rutor.
-I "Search Pallets" väljer du först vad du vill söka via. Du skriver sedan in ID/Tid/Kund/Produkt som du vill söka på. För blocked behöver du bara trycka sök så kommer alla blockerade pallar upp. Du får upp en lista över alla pallar som är under sökrestriktionen, och klickar du på ID:t så kommer det upp mer information till höger.
+Lägg till JDBC i referenced libraries efter nedladdning av projektet. Ta bort eventuell gammal sökväg.
+I "Produce Pallets" skriver du in namnet på produkten du vill skapa. Produktens namn, ID och produktionsdatum står till höger. Ingredienserna efter uppdatering skrivs ut med hur mycket som är kvar på lagret.
+I "Block Pallets" skriver du in produktens namn och tidsspannet som du vill blocka i nedanstående rutor. Du kan skriva allt från 0 till 2017-07-30 00:00:00 format.
+I "Search Pallets" väljer du först vad du vill söka via. Du skriver sedan in ID/Tid/Kund/Produkt som du vill söka på. Sök är "case sensitive" så börja med storbokstav på produkter. Exempel står redan utskrivet. För blocked behöver du bara trycka sök så kommer alla blockerade pallar upp. Du får upp en lista över alla pallar som är under sökrestriktionen, och klickar du på ID:t så kommer det upp mer information till höger.
