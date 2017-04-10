@@ -90,12 +90,14 @@ public class BlockingPallets extends BasicPane {
 			String cookieName = fields[COOKIE_NAME].getText();
 			String date1 = fields[PALLET_START_TIME].getText();
 			String date2 = fields[PALLET_END_TIME].getText();
+			int nr = 0;
 			Set<String> pID = new HashSet<String>();
 			Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
 			if (db.getCookieName().contains(cookieName)) {
 				Set<String> dates = db.getCookieDateProduced(cookieName);
 				for (String date : dates) {
 					if (date.compareTo(date1) >= 0 && date.compareTo(date2) <= 0) {
+						nr++;
 						for (String p : pallets) {
 							if (!db.getCustomers().contains(db.getCustomer(p))) {
 								db.blockPallet(p);
@@ -103,7 +105,7 @@ public class BlockingPallets extends BasicPane {
 							}
 						}
 						messageLabel.setText("Pallet with ID " + pID + " is blocked");
-					} else {
+					} else if (nr == 0) {
 						messageLabel.setText(
 								"There was no pallets produced within this time span with the product: " + cookieName);
 					}
