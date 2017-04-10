@@ -110,18 +110,31 @@ public class ProducingPallets extends BasicPane {
 		 */
 		public void actionPerformed(ActionEvent e) {
 			String cookieName = field.getText();
+			int nr = 0;
 			if (db.getCookieName().contains(cookieName)) {
-				int produce = db.producePallet(cookieName);
 				Set<String> ingredients = db.getIngredients(cookieName);
 				for (String ingredient : ingredients) {
 					String amnt = db.getIngredientAmount(ingredient, cookieName);
-					db.updateIngredients(amnt, ingredient);
+					if (Integer.parseInt(db.getAmountInStorage(ingredient)) < Integer.parseInt(amnt)) {
+						nr++;
+					}
 				}
-				String palletID = Integer.toString(produce);
-				fields[COOKIE_NAME].setText(cookieName);
-				fields[DATE_TIME].setText(db.getPalletDateProduced(palletID));
-				fields[PALLET_ID].setText(palletID);
-				db.getAmountInStorage();
+				if (nr == 0) {
+					for (String ingredient : ingredients) {
+						String amnt = db.getIngredientAmount(ingredient, cookieName);
+						db.updateIngredients(amnt, ingredient);
+					}
+					int produce = db.producePallet(cookieName);
+					String palletID = Integer.toString(produce);
+					fields[COOKIE_NAME].setText(cookieName);
+					fields[DATE_TIME].setText(db.getPalletDateProduced(palletID));
+					fields[PALLET_ID].setText(palletID);
+					messageLabel.setText(" ");
+					db.getAmountInStorage();
+					System.out.println("-------------------------");
+				} else {
+					messageLabel.setText("Not enough ingredients");
+				}
 
 			} else {
 				messageLabel.setText("There are no cookies with that name");
