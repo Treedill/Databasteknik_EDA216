@@ -176,6 +176,7 @@ public class SearchingPallets extends BasicPane {
 		infoList.setPrototypeCellValue("123456789012");
 		infoList.addListSelectionListener(new InfoSelectionListener());
 		JScrollPane p1 = new JScrollPane(infoList);
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 2));
 		panel.add(p1);

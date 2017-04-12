@@ -148,4 +148,6 @@ public class BasicPane extends JPanel {
 	public void clearMessage() {
 		messageLabel.setText(" ");
 	}
+
 }
+
