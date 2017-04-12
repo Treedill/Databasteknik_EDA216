@@ -2,10 +2,16 @@ package eda216_project;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ProducingPallets extends BasicPane {
@@ -15,6 +21,8 @@ public class ProducingPallets extends BasicPane {
 	 * The text field where the user id is entered.
 	 */
 	private JTextField[] fields;
+
+	private JTextField field;
 
 	/**
 	 * The number of the field where the cookie is entered.
@@ -47,11 +55,13 @@ public class ProducingPallets extends BasicPane {
 	 * @return The left panel.
 	 */
 	public JComponent createLeftTopPanel() {
-		String[] texts = new String[1];
-		texts[COOKIE_NAME] = "Cookie name";
-		fields = new JTextField[1];
-		fields[COOKIE_NAME] = new JTextField(12);
-		return new InputPanel(texts, fields);
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel();
+		label.setText("Cookie name");
+		field = new JTextField(20);
+		panel.add(label);
+		panel.add(field);
+		return panel;
 	}
 
 	/**
@@ -99,15 +109,34 @@ public class ProducingPallets extends BasicPane {
 		 *            The event object (not used).
 		 */
 		public void actionPerformed(ActionEvent e) {
-			LocalDateTime now = LocalDateTime.now();
-			String cookieName = fields[COOKIE_NAME].getText();
-			String dateAndTime = now.toString();
-			String palletID = "1";
+			String cookieName = field.getText();
+			int nr = 0;
 			if (db.getCookieName().contains(cookieName)) {
-				db.producePallet();
-				fields[DATE_TIME].setText(dateAndTime);
-				fields[PALLET_ID].setText(palletID);
-			}else{
+				Set<String> ingredients = db.getIngredients(cookieName);
+				for (String ingredient : ingredients) {
+					String amnt = db.getIngredientAmount(ingredient, cookieName);
+					if (Integer.parseInt(db.getAmountInStorage(ingredient)) < Integer.parseInt(amnt)) {
+						nr++;
+					}
+				}
+				if (nr == 0) {
+					for (String ingredient : ingredients) {
+						String amnt = db.getIngredientAmount(ingredient, cookieName);
+						db.updateIngredients(amnt, ingredient);
+					}
+					int produce = db.producePallet(cookieName);
+					String palletID = Integer.toString(produce);
+					fields[COOKIE_NAME].setText(cookieName);
+					fields[DATE_TIME].setText(db.getPalletDateProduced(palletID));
+					fields[PALLET_ID].setText(palletID);
+					messageLabel.setText(" ");
+					db.getAmountInStorage();
+					System.out.println("-------------------------");
+				} else {
+					messageLabel.setText("Not enough ingredients");
+				}
+
+			} else {
 				messageLabel.setText("There are no cookies with that name");
 			}
 		}

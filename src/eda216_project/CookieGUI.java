@@ -46,11 +46,11 @@ public class CookieGUI {
         tabbedPane.setSelectedIndex(0);
 
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
-
+        
         tabbedPane.addChangeListener(new ChangeHandler());
         frame.addWindowListener(new WindowHandler());
 
-        frame.setSize(500, 400);
+        frame.setSize(800, 400);
         frame.setVisible(true);
 
         //userLoginPane.displayMessage("Connecting to database ...");
@@ -59,6 +59,7 @@ public class CookieGUI {
         /* --- change xxx to the name of the file with your database --- DONE */
         if (db.openConnection("databas.db")) {
             prod.displayMessage("Connected to database");
+           // db.getAmountInStorage();
         } else {
            prod.displayMessage("Could not connect to database");
         }

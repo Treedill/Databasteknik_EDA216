@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 public class InputPanel extends JPanel {
 
     private static final long serialVersionUID = 1;
-
+    private JTextField[] fields;
     /**
      * Create the panel with the specified fields and labels.
      * 
@@ -24,10 +24,11 @@ public class InputPanel extends JPanel {
      *            The text fields.
      */
     public InputPanel(String[] texts, JTextField[] fields) {
+    	this.fields = fields;
         JPanel left = new JPanel();
         left.setLayout(new GridLayout(texts.length, 1));
         for (int i = 0; i < texts.length; i++) {
-            JLabel label = new JLabel(texts[i] + "      ", JLabel.RIGHT);
+            JLabel label = new JLabel(texts[i] + "  ", JLabel.RIGHT);
             left.add(label);
         }
 

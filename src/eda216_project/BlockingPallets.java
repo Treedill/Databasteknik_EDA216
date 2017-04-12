@@ -2,6 +2,8 @@ package eda216_project;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -77,7 +79,7 @@ public class BlockingPallets extends BasicPane {
 	 */
 	class ActionHandler implements ActionListener {
 		/**
-		 * Called when the user clicks the login button. Checks with the
+		 * Called when the user clicks the block button. Checks with the
 		 * database if the user exists, and if so notifies the CurrentUser
 		 * object.
 		 * 
@@ -86,17 +88,29 @@ public class BlockingPallets extends BasicPane {
 		 */
 		public void actionPerformed(ActionEvent e) {
 			String cookieName = fields[COOKIE_NAME].getText();
-			String palletStartTime = fields[PALLET_START_TIME].getText();
-			String palletEndTime = fields[PALLET_END_TIME].getText();
+			String date1 = fields[PALLET_START_TIME].getText();
+			String date2 = fields[PALLET_END_TIME].getText();
+			int nr = 0;
+			Set<String> pID = new HashSet<String>();
+			Set<String> pallets = db.getCookieDatePallets(cookieName, date1, date2);
 			if (db.getCookieName().contains(cookieName)) {
-				if (db.getPalletDateProduced(cookieName).compareTo(palletStartTime) >= 0
-						&& db.getPalletDateProduced(cookieName).compareTo(palletEndTime) <= 0) {
-					//blockPallet
-					messageLabel.setText("Pallet with ID " + cookieName + "is blocked");
-				}else{
-					messageLabel.setText("There was no pallets produced within this time span with the product: " + cookieName);
+				Set<String> dates = db.getCookieDateProduced(cookieName);
+				for (String date : dates) {
+					if (date.compareTo(date1) >= 0 && date.compareTo(date2) <= 0) {
+						nr++;
+						for (String p : pallets) {
+							if (!db.getCustomers().contains(db.getCustomer(p))) {
+								db.blockPallet(p);
+								pID.add(p);
+							}
+						}
+						messageLabel.setText("Pallet with ID " + pID + " is blocked");
+					} else if (nr == 0) {
+						messageLabel.setText(
+								"There was no pallets produced within this time span with the product: " + cookieName);
+					}
 				}
-			}else{
+			} else {
 				messageLabel.setText("There are no cookies with that name");
 			}
 		}
