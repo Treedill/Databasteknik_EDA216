@@ -13,9 +13,6 @@ DROP TABLE IF EXISTS RecipeItems;
 PRAGMA foreign_keys=ON;
 
 CREATE TABLE Customers(
-  /*
-ssn CHAR(12),
-  */
 customerName VARCHAR(30),
 address VARCHAR(40),
 PRIMARY KEY (customerName)
@@ -43,17 +40,11 @@ FOREIGN KEY (orderNbr) references Orders(orderNbr)
 );
 
 CREATE TABLE Products(
-  /*
-cookieID int auto_increment,
-  */
 cookie VARCHAR(30),
 PRIMARY KEY (cookie)
 );
 
 CREATE TABLE Ingredients(
-  /*
-ingredientID int auto_increment,
-  */
 ingredient VARCHAR(30),
 amountStorage int DEFAULT 5000,
 deliveryDate date,
@@ -127,7 +118,7 @@ INSERT INTO Ingredients (ingredient) VALUES('Cinnamon');
 INSERT INTO Ingredients (ingredient) VALUES('Vanilla sugar');
 
 /*
-Dessa måste väl finnas för att kunna få upp customer?
+Lägger in orders
 */
 INSERT INTO Orders (orderNbr, customerName, placedDate, deliveryDate)
 VALUES (1, 'Finkakor AB', 2016-03-10, 2016-05-10);
@@ -148,10 +139,8 @@ VALUES (1, datetime('now'), 0,  'Nut ring', 1);
 INSERT INTO Pallets (palletID, dateProduced, isBLocked, cookie, orderNbr)
 VALUES (2, datetime('now'), 0,  'Tango', 3);
 
-
-
 /*
-Känns som detta inte är BCNF dock asså...
+Lägger in recepten
 */
 
 INSERT INTO RecipeItems (ingredient, cookie, amount) VALUES('Flour','Nut ring' , 450);
