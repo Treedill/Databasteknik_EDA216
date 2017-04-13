@@ -6,7 +6,7 @@ Johannes Törnblom, dic15jto@student.lu.se, C15
 Jenny Martinsson, dic15jma@student.lu.se, C15
 
 ## Introduktion
-Projektet handlar om att göra ett databassystem åt Krusty Kookies Sweden AB. Vi ska implementera en databas och ett användargränssnitt som hanterar allting som rör produktion, blockering och sökning av pallar.
+Projektet handlar om att göra ett databassystem åt det fiktiva företaget "Krusty Kookies Sweden AB". Problemet som gavs är att en databas och ett användargränssnitt ska implementeras. Dessa ska hantera allting som rör produktion, blockering, och sökning av pallar. 
 
 ## Noteringar om vilka krav vi uppfyller/inte uppfyller
 #### Produktion
@@ -34,13 +34,14 @@ Detta visas i "search pallets".
 Vi har inte information om en pall levererats eller datum och tid av leveransen eftersom vårt program inte sköter leveranser. Kunden kan dock visas.
 
 #### Beställning och produktplanering
-VI skulle inte implementera beställningar.
+Vi skulle inte implementera beställningar.
 
 #### Leverans
 Vi skulle inte implementera leverans.
 
 ## Outline
-Vi har använt oss av SQLite för vår databas, och en javaapplication som kommunicerar med vår databas genom JDBC. 
+Vi har använt oss av SQLite som vår "database management system", och utvecklat en tillhörande applikation i Java som kommunicerar med vår databas genom användning av Java Database Connectivity (JDBC). Dessa designval var enkla att ta, då vi under kursens gång i stora drag endast har hanterat SQLite, var det ett självklart val. Likaså är Java standard att använda sig av utgenom våra kurser, så även där faller det sig självklart att ta Java. JDBC är Javas sätt att att prata med DBMS's.
+
 ## ER-diagram
 Se på följande länk
 https://github.com/Treedill/Databasteknik_EDA216/blob/master/ER%20diagram.png?raw=true
