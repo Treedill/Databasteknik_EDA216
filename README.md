@@ -65,9 +65,9 @@ orderItems(nbrPallets, **_orderNbr_, _cookie_**)
 Det finns inga funktionella beroenden förutom nyckelberoendena. Därför är relationerna i BCNF.
 
 ## SQL statements
-För att se de skapade tabellerna, titta på database.sql: Databasteknik_EDA216/databas.sql.
+För att se de skapade tabellerna, titta på database.sql: https://github.com/Treedill/Databasteknik_EDA216/blob/master/databas.sql.
 
-För annan SQL kod, se Database.java i src: Databasteknik_EDA216/src/eda216_project/Database.java.
+För annan SQL kod, se Database.java i src: https://github.com/Treedill/Databasteknik_EDA216/blob/master/src/eda216_project/Database.java.
 
 ## Användarmanual
 Lägg till JDBC i referenced libraries efter nedladdning av projektet. Ta bort eventuell gammal sökväg.
