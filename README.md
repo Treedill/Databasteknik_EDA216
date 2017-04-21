@@ -17,7 +17,7 @@ Vi kan kontrollera hur många pallar som producerats under en viss tid.
 Detta görs i "search pallets".
 #### Råmaterial
 Ingredienserna i lagret uppdateras vid produktion. 
-Detta kan ses i konsollen, där amountStorage skrivs ut. Det är 5000 av alla ingredienser från början.
+Detta kan ses i konsollen, där amountStorage skrivs ut. Det finns 5000 enheter av alla ingredienser från början.
 
 Hur mycket som levererats av ingredienser och när senaste leveransen gjordes. Detta uppfylls inte eftersom vårt program inte har hand om ingredienser på det sättet.
 
